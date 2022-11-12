@@ -426,7 +426,7 @@ const ContentModellierung = () => {
   const [bewohnerSachsenAn] = useState(5);
   const [flächeSachsenAn] = useState(180);
 
-  const [output, setOutput] = useState({});
+  const [output] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault(); // to prevent the page from refreshing when the form is submitted.
