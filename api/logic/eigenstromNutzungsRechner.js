@@ -1,7 +1,10 @@
-function calculateGesamtEigenstromNutzung(direktGenutzterEigenstrom, gespeicherterEigenstrom) {
-    return direktGenutzterEigenstrom + gespeicherterEigenstrom;
+function calculateGesamtEigenstromNutzung(
+  direktGenutzterEigenstrom,
+  gespeicherterEigenstrom
+) {
+  return direktGenutzterEigenstrom + gespeicherterEigenstrom;
 }
 
-const calculator = {calculateGesamtEigenstromNutzung};
+const calculator = { calculateGesamtEigenstromNutzung };
 
 export default calculator;

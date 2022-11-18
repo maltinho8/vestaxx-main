@@ -1,5 +1,4 @@
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Snip1214 = styled.div`
   color: #000000;
@@ -9,7 +8,7 @@ export const Snip1214 = styled.div`
   max-width: 1000px;
   margin: 30px 10px;
   position: center;
-  
+
   @media only screen and (min-width: 768px) {
     width: 100%;
     -webkit-transform: translateY(0);
@@ -17,7 +16,6 @@ export const Snip1214 = styled.div`
     padding: 20px 10px 20px;
     padding: 10px 10px 10px;
     margin-top: 0;
-   
   }
 `;
 

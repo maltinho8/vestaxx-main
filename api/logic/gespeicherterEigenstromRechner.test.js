@@ -1,36 +1,47 @@
-import gespeicherterEigenstromRechner from "./gespeicherterEigenstromRechner.js";
-import faktorNennkapazitaetRechner from "./support/faktorNennkapazitaetRechner.js";
-import konstanten from "../../konstanten.js";
+import gespeicherterEigenstromRechner from './gespeicherterEigenstromRechner.js';
+import faktorNennkapazitaetRechner from './support/faktorNennkapazitaetRechner.js';
+import konstanten from '../../konstanten.js';
 import jest from 'jest-mock';
 
-const FAKTOR_NENNKAPAZITAET = 0.2047406103788650;
+const FAKTOR_NENNKAPAZITAET = 0.204740610378865;
 
-let faktorNennkapazitaetMock = faktorNennkapazitaetRechner.calculateFaktorNennkapazitaet = jest.fn();
+let faktorNennkapazitaetMock =
+  (faktorNennkapazitaetRechner.calculateFaktorNennkapazitaet = jest.fn());
 
-test("Berechnung der monatlichen EigenstromSpeicherung", () => {
-    faktorNennkapazitaetMock.mockReturnValue(FAKTOR_NENNKAPAZITAET);
-    let gesamtPVErtrag = 9430;
-    let iesn = 6.63288719430633;
-    let direkteEigenstromNutzung = 165.5375109;
-    let pvErtrag = 310;
-    let strombedarf = 1755.266942;
-    let expected = 128.06142;
-    let result = gespeicherterEigenstromRechner.calculateGespeicherterEigenstromProMonat(gesamtPVErtrag, iesn, direkteEigenstromNutzung, pvErtrag, strombedarf);
-    assertFaktorNennkapazitaetMock();
-    expect(Math.round(result * 100_000) / 100_000).toBe(expected);
+test('Berechnung der monatlichen EigenstromSpeicherung', () => {
+  faktorNennkapazitaetMock.mockReturnValue(FAKTOR_NENNKAPAZITAET);
+  let gesamtPVErtrag = 9430;
+  let iesn = 6.63288719430633;
+  let direkteEigenstromNutzung = 165.5375109;
+  let pvErtrag = 310;
+  let strombedarf = 1755.266942;
+  let expected = 128.06142;
+  let result =
+    gespeicherterEigenstromRechner.calculateGespeicherterEigenstromProMonat(
+      gesamtPVErtrag,
+      iesn,
+      direkteEigenstromNutzung,
+      pvErtrag,
+      strombedarf
+    );
+  assertFaktorNennkapazitaetMock();
+  expect(Math.round(result * 100_000) / 100_000).toBe(expected);
 });
 
 function assertFaktorNennkapazitaetMock() {
-    let nennKapazitaet = konstanten.nennkapazitaetStromspeicher;
-    expect(faktorNennkapazitaetMock).toHaveBeenCalledWith(nennKapazitaet);
-    expect(faktorNennkapazitaetMock).toHaveBeenCalledTimes(1);
-    expect(faktorNennkapazitaetMock(nennKapazitaet)).toBe(FAKTOR_NENNKAPAZITAET);
+  let nennKapazitaet = konstanten.nennkapazitaetStromspeicher;
+  expect(faktorNennkapazitaetMock).toHaveBeenCalledWith(nennKapazitaet);
+  expect(faktorNennkapazitaetMock).toHaveBeenCalledTimes(1);
+  expect(faktorNennkapazitaetMock(nennKapazitaet)).toBe(FAKTOR_NENNKAPAZITAET);
 }
 
-test("Berechnung der jährlichen EigenstromSpeicherung", () => {
-    faktorNennkapazitaetMock.mockReturnValue(FAKTOR_NENNKAPAZITAET);
-    let result = gespeicherterEigenstromRechner.calculateGespeicherterEigenstromJaehrlich(10170)
-    expect(Math.round(result)).toBe(2082);
+test('Berechnung der jährlichen EigenstromSpeicherung', () => {
+  faktorNennkapazitaetMock.mockReturnValue(FAKTOR_NENNKAPAZITAET);
+  let result =
+    gespeicherterEigenstromRechner.calculateGespeicherterEigenstromJaehrlich(
+      10170
+    );
+  expect(Math.round(result)).toBe(2082);
 });
 
 //Test für "alte" Berechnung (Summe der monatlichen Werte)
@@ -46,5 +57,3 @@ test("Berechnung der jährlichen EigenstromSpeicherung", () => {
         expect(Math.round(result[i] * 100) / 100).toBe(expected[i]);
     }
 });*/
-
-

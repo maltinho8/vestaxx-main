@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Box = styled.div`
   background-color: black;
   position: sticky;
-  
+
   top: 0;
   width: 100%;
   border-top: 1px solid white;
@@ -28,12 +28,11 @@ const Column = styled.div`
 
 const Row2 = styled.div`
   display: flex;
-    grid-gap: 20px;
-    justify-content: center;
-    width: 100%;
-    margin-left: 0rem;
-    margin-top: 0rem;
-  
+  grid-gap: 20px;
+  justify-content: center;
+  width: 100%;
+  margin-left: 0rem;
+  margin-top: 0rem;
 `;
 
 const HeadingTwo = styled.p`
@@ -54,27 +53,35 @@ const RowContainer = styled.div`
   }
 `;
 
-
-
 const Footer = () => {
   return (
     <Box>
       <Container>
         <RowContainer>
-          
           <Row2>
-           
-          <Column>
-              <HeadingTwo><a href="https://www.vestaxx.de/"><font color="#ffffff">vestaxx GmbH</font></a></HeadingTwo>
+            <Column>
+              <HeadingTwo>
+                <a href="https://www.vestaxx.de/">
+                  <font color="#ffffff">vestaxx GmbH</font>
+                </a>
+              </HeadingTwo>
             </Column>
             <Column>
-              <HeadingTwo> <a href="https://www.vestaxx.de/impressum.php"><font color="#ffffff">Impressum</font></a> | <a href="https://www.vestaxx.de/datenschutz.php"><font color="#ffffff">Datenschutz</font></a> </HeadingTwo>
+              <HeadingTwo>
+                {' '}
+                <a href="https://www.vestaxx.de/impressum.php">
+                  <font color="#ffffff">Impressum</font>
+                </a>{' '}
+                |{' '}
+                <a href="https://www.vestaxx.de/datenschutz.php">
+                  <font color="#ffffff">Datenschutz</font>
+                </a>{' '}
+              </HeadingTwo>
             </Column>
             <Column>
               <HeadingTwo>Copyright 2022 © Vestaxx GmbH</HeadingTwo>
             </Column>
           </Row2>
-
         </RowContainer>
       </Container>
     </Box>

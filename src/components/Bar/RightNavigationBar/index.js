@@ -4,7 +4,7 @@ import Content from './RightNavigationBarContent';
 
 const Ul = styled.div`
   @media (max-width: 900px) {
-    width: 100vw!important;
+    width: 100vw !important;
     flex-flow: column nowrap;
     background-color: black;
     background-size: cover;
@@ -21,14 +21,14 @@ const Ul = styled.div`
   }
 `;
 
-const RightNav = ({closeMenu}) => {
-    /* Nutzung der Methode closeMenu durch Übergabe in burger.js  */
-    return (
-        <Ul>
-            < Content closeMenu={closeMenu}/>
-            {/* Übergabe der Methode closeMenu zur Komponente Content  */}
-        </Ul>
-    )
-}
+const RightNav = ({ closeMenu }) => {
+  /* Nutzung der Methode closeMenu durch Übergabe in burger.js  */
+  return (
+    <Ul>
+      <Content closeMenu={closeMenu} />
+      {/* Übergabe der Methode closeMenu zur Komponente Content  */}
+    </Ul>
+  );
+};
 
 export default RightNav;

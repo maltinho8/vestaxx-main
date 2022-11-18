@@ -1,5 +1,4 @@
-import {createGlobalStyle} from "styled-components";
-
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -58,27 +57,25 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 const theme = {
-    palette: {
-        primary: {
-            main: '#3D5A80',
-            light: '#98C1D9',
-            ultraLight: '#E0FBFC',
-        },
-        secondary: {
-            main: '#EE6C4D',
-            light: '#F3947C',
-        },
-        text: {
-            main: '#293241',
-            light: '#F5F5F5',
-        },
-        background: {
-            dark: '#1E2426',
-            light: '#ffffff',
-        }
+  palette: {
+    primary: {
+      main: '#3D5A80',
+      light: '#98C1D9',
+      ultraLight: '#E0FBFC',
     },
-
-
+    secondary: {
+      main: '#EE6C4D',
+      light: '#F3947C',
+    },
+    text: {
+      main: '#293241',
+      light: '#F5F5F5',
+    },
+    background: {
+      dark: '#1E2426',
+      light: '#ffffff',
+    },
+  },
 };
 
 export default theme;
