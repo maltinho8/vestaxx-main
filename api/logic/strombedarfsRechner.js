@@ -135,7 +135,8 @@ function calculateStrombedarfHeizenProQmProMonat(
       case 12:
         aufwandszahlVerglasungProMonat = 1.2918333681151;
         break;
-      default: aufwandszahlVerglasungProMonat = 1.29307218608704;
+      default:
+        aufwandszahlVerglasungProMonat = 1.29307218608704;
     }
   } else {
     switch (monat) {
@@ -175,7 +176,8 @@ function calculateStrombedarfHeizenProQmProMonat(
       case 12:
         aufwandszahlVerglasungProMonat = 1.11345139434943;
         break;
-      default: aufwandszahlVerglasungProMonat = 1.11383081876655;
+      default:
+        aufwandszahlVerglasungProMonat = 1.11383081876655;
     }
   }
 
@@ -258,7 +260,8 @@ function calculateStrombedarfTwwProQmProMonat(twwbedarfProQmProMonat, Monat) {
     case 12:
       aufwandszahlWaermeProMonat = 0.350803787711958;
       break;
-    default: aufwandszahlWaermeProMonat = 0.363615612873774;
+    default:
+      aufwandszahlWaermeProMonat = 0.363615612873774;
   }
 
   return twwbedarfProQmProMonat * aufwandszahlWaermeProMonat;
@@ -329,7 +332,8 @@ function calculateStrombedarfHaushaltProQmProMonat(
     case 12:
       haushaltanteilProMonat = 9.45469303475355 / 100;
       break;
-    default: haushaltanteilProMonat = 9.28496844406072 / 100;
+    default:
+      haushaltanteilProMonat = 9.28496844406072 / 100;
   }
 
   return strombedarfHaushaltProQm * haushaltanteilProMonat;
@@ -362,7 +366,8 @@ function calculateStrombedarfHaushalt(anzahlBewohner) {
     case 5:
       StrombedarfHaushalt = 4100;
       break;
-    default: StrombedarfHaushalt = 1700;
+    default:
+      StrombedarfHaushalt = 1700;
   }
   return StrombedarfHaushalt;
 }
