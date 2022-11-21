@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import './index.css';
 import { Link } from 'react-router-dom';
 import Card from '../ContentLandingPage/Card/Card.js';
+import MuiCard from '../ContentLandingPage/MuiCard/index.js';
 import card1img from './img/card1-house-entry-vestaxx.jpg';
 import card2img from './img/card2-kitchen-vestaxx.jpg';
 import card3img from './img/card3-family-vestaxx.jpg';
@@ -140,6 +141,7 @@ const ContentLandingPage = () => {
               text="Wussten Sie, dass Heizwärme gar nicht mehr den größten Teil der Energieflüsse in Einfamilienhäusern ausmacht? Viel höher sind zum Beispiel die Bedarfe an Warmwasser und Strom."
             />
           </CardContainer>
+          <MuiCard />
 
           <Link to={'/Modellierung'}>
             <button className="pointer" type="submit">
