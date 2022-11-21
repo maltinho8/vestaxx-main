@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-
-
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 
 .center {
   text-align: center;
@@ -21,7 +19,7 @@ header {
 }
 
 header h1 {
-  margin: 0
+  margin: 0;
 }
 
 .page {
@@ -50,7 +48,6 @@ header section a {
   float: right;
   padding: 3px 0;
 }
-
 
 button {
   -webkit-appearance: none;
@@ -89,12 +86,12 @@ button:hover {
 
 .slide {
   height: 45vh;
-  
+
   background-size: cover !important;
 }
 
 .slide::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   width: 100%;
@@ -117,8 +114,8 @@ button:hover {
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background: url("https://cdn-icons-png.flaticon.com/128/892/892662.png") no-repeat center center /
-    16px;
+  background: url('https://cdn-icons-png.flaticon.com/128/892/892662.png')
+    no-repeat center center / 16px;
   width: 32px;
   height: 32px;
   text-indent: -9999px;
@@ -127,8 +124,8 @@ button:hover {
 
 .previousButton:hover,
 .nextButton:hover {
-  background: url("https://cdn-icons-png.flaticon.com/128/892/892662.png") no-repeat center center /
-    16px;
+  background: url('https://cdn-icons-png.flaticon.com/128/892/892662.png')
+    no-repeat center center / 16px;
 }
 
 .previousButton {

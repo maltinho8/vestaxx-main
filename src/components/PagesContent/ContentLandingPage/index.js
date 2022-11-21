@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import "./index.css";
-import { Link } from "react-router-dom";
-import Card from "../ContentLandingPage/Card/Card.js";
-import card1img from "./img/card1-house-entry-vestaxx.jpg";
-import card2img from "./img/card2-kitchen-vestaxx.jpg";
-import card3img from "./img/card3-family-vestaxx.jpg";
-import img from "../../assets/img/vestaxx.jpg";
+import React from 'react';
+import styled from 'styled-components';
+import './index.css';
+import { Link } from 'react-router-dom';
+import Card from '../ContentLandingPage/Card/Card.js';
+import MuiCard from '../ContentLandingPage/MuiCard/index.js';
+import card1img from './img/card1-house-entry-vestaxx.jpg';
+import card2img from './img/card2-kitchen-vestaxx.jpg';
+import card3img from './img/card3-family-vestaxx.jpg';
+import img from '../../assets/img/vestaxx.jpg';
 
 const Container = styled.div``;
 
@@ -79,10 +80,8 @@ const IntroText = styled.p`
 `;
 
 const Background = styled.div`
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.5), 
-    rgba(0, 0, 0, 0.5)
-  ),url(${img});
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(${img});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -103,8 +102,6 @@ const CardContainer = styled.div`
 `;
 
 const ContentLandingPage = () => {
-  
-
   return (
     <Container>
       <Background>
@@ -116,24 +113,41 @@ const ContentLandingPage = () => {
       <BackgroundContainer>
         <ContentContainer>
           <Boxes>
-            <IntroText>Auf diesem Online-Portal können Sie einfach ausrechnen lassen, welches regenerative Heizsystem aus ökologischen und ökonomischen Gründen für Sie am sinnvollsten ist. Im ersten Schritt können Sie Ihr Haus gemäß Ihren Wünschen und Vorstellungen konfigurieren. Im zweiten Schritt erhalten Sie eine Vergleichsrechnung, in der verschiedene Heizsysteme  gegenübergestellt werden und das System hervorgehoben wird, das am besten zu Ihnen passt.</IntroText>
+            <IntroText>
+              Auf diesem Online-Portal können Sie einfach ausrechnen lassen,
+              welches regenerative Heizsystem aus ökologischen und ökonomischen
+              Gründen für Sie am sinnvollsten ist. Im ersten Schritt können Sie
+              Ihr Haus gemäß Ihren Wünschen und Vorstellungen konfigurieren. Im
+              zweiten Schritt erhalten Sie eine Vergleichsrechnung, in der
+              verschiedene Heizsysteme gegenübergestellt werden und das System
+              hervorgehoben wird, das am besten zu Ihnen passt.
+            </IntroText>
           </Boxes>
         </ContentContainer>
         <ContentContainer>
           <h3>Was wir Ihnen bieten</h3>
           <br />
           <CardContainer>
-            <Card img={card1img} text="Eine neue und innovative Art zu heizen sind die mit Strom betriebenen Heizscheiben von Vestaxx. Der Strom erzeugt Infrarotstrahlen, mit denen gleichmäßig Wände, Möbel und Körper erwärmt werden."/>
-            <Card img={card2img} text="Mit nur wenigen Angaben zu Ihrem Traumhaus schlagen wir passende Grundrisse vor und stellen eine erste Vergleichsrechnung für Heizsysteme bereit."/>
-            <Card img={card3img} text="Wussten Sie, dass Heizwärme gar nicht mehr den größten Teil der Energieflüsse in Einfamilienhäusern ausmacht? Viel höher sind zum Beispiel die Bedarfe an Warmwasser und Strom."/>
+            <Card
+              img={card1img}
+              text="Eine neue und innovative Art zu heizen sind die mit Strom betriebenen Heizscheiben von Vestaxx. Der Strom erzeugt Infrarotstrahlen, mit denen gleichmäßig Wände, Möbel und Körper erwärmt werden."
+            />
+            <Card
+              img={card2img}
+              text="Mit nur wenigen Angaben zu Ihrem Traumhaus schlagen wir passende Grundrisse vor und stellen eine erste Vergleichsrechnung für Heizsysteme bereit."
+            />
+            <Card
+              img={card3img}
+              text="Wussten Sie, dass Heizwärme gar nicht mehr den größten Teil der Energieflüsse in Einfamilienhäusern ausmacht? Viel höher sind zum Beispiel die Bedarfe an Warmwasser und Strom."
+            />
           </CardContainer>
+          <MuiCard />
 
-          <Link to={"/Modellierung"}>
+          <Link to={'/Modellierung'}>
             <button className="pointer" type="submit">
               Legen Sie los!
             </button>
           </Link>
-
         </ContentContainer>
       </BackgroundContainer>
     </Container>

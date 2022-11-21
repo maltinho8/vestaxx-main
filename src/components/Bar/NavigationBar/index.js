@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Burger from "../Burger";
-import {NavLink as Link} from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import Burger from '../Burger';
+import { NavLink as Link } from 'react-router-dom';
 
 const Nav = styled.nav`
   background: black;
@@ -60,7 +60,7 @@ const NavBtnLink = styled.button`
   color: white;
   outline: none;
   border: 1px solid orange;
-  
+
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -86,12 +86,20 @@ const NavBar = () => {
         </NavMenu>
         <NavBtn>
           <NavBtnLink>
-        <a href="https://www.vestaxx.de/#kontakt" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'orange', fontWeight: 'bold'}}>
-          Kontakt
-        </a>
-        </NavBtnLink>
+            <a
+              href="https://www.vestaxx.de/#kontakt"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: 'none',
+                color: 'orange',
+                fontWeight: 'bold',
+              }}
+            >
+              Kontakt
+            </a>
+          </NavBtnLink>
         </NavBtn>
-        
       </Nav>
     </>
   );

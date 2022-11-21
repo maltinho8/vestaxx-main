@@ -1,9 +1,12 @@
-function calculateNetzbezugJaehrlich(gesamtStrombedarf, gesamtEigenstromNutzung) {
-    return gesamtStrombedarf - gesamtEigenstromNutzung;
+function calculateNetzbezugJaehrlich(
+  gesamtStrombedarf,
+  gesamtEigenstromNutzung
+) {
+  return gesamtStrombedarf - gesamtEigenstromNutzung;
 }
 
 const calculator = {
-    calculateNetzbezugJaehrlich
+  calculateNetzbezugJaehrlich,
 };
 
 export default calculator;

@@ -4,8 +4,7 @@
   cursor: pointer;
 }
 
-.pointer{
-  
+.pointer {
   cursor: pointer;
 }
 
@@ -51,7 +50,6 @@
    left: 200%;
 */
 
-
   /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
@@ -59,7 +57,7 @@
 
 /* Tooltip arrow */
 .tooltip .tooltiptext::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 50%;
