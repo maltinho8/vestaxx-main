@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Burger from "../Burger";
-import {NavLink as Link} from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 
 const Nav = styled.nav`
-  background: black;
+  background: #f2ecd4;
   height: 130px;
   display: flex;
   justify-content: space-between;
@@ -24,6 +24,7 @@ const NavLink = styled(Link)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
+  font-weight: bold;
   &.active {
     font-weight: bold;
   }
@@ -38,6 +39,7 @@ const NavMenu = styled.div`
 
 const LogoHeadline = styled.h4`
   margin-left: 5rem;
+  font-weight: bold;
   @media screen and (max-width: 768px) {
     font-size: 1.2rem;
     margin-left: 4rem;
@@ -58,9 +60,8 @@ const NavBtnLink = styled.button`
 
   padding: 10px 22px;
   color: white;
-  outline: none;
   border: 1px solid orange;
-  
+
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -68,8 +69,9 @@ const NavBtnLink = styled.button`
   margin-left: 24px;
   &:hover {
     transition: all 0.2s ease-in-out;
-    border: 1px solid white;
+    border: 2px solid darkorange;
     opacity: 1;
+    background-color: transparent;
   }
 `;
 
@@ -86,12 +88,20 @@ const NavBar = () => {
         </NavMenu>
         <NavBtn>
           <NavBtnLink>
-        <a href="https://www.vestaxx.de/#kontakt" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'orange', fontWeight: 'bold'}}>
-          Kontakt
-        </a>
-        </NavBtnLink>
+            <a
+              href="https://www.vestaxx.de/#kontakt"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                color: "orange",
+                fontWeight: "bold",
+              }}
+            >
+              Kontakt
+            </a>
+          </NavBtnLink>
         </NavBtn>
-        
       </Nav>
     </>
   );
