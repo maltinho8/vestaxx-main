@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+
 export const GlobalStyle = createGlobalStyle`
 
  
@@ -59,6 +60,7 @@ export const GlobalStyle = createGlobalStyle`
 const theme = {
   palette: {
     primary: {
+
       main: "#3D5A80",
       light: "#98C1D9",
       ultraLight: "#E0FBFC",
@@ -74,6 +76,7 @@ const theme = {
     background: {
       dark: "#1E2426",
       light: "#F2ECD4",
+
     },
   },
 };

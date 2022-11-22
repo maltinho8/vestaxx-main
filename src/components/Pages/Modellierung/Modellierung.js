@@ -10,11 +10,11 @@ padding: 2rem;
 }
 `;
 const Modellierung = () => {
-    return (
-        <ContentContainer>
-            <ContentModellierung/>
-        </ContentContainer>
-    );
-}
+  return (
+    <ContentContainer>
+      <ContentModellierung />
+    </ContentContainer>
+  );
+};
 
 export default Modellierung;

@@ -6,7 +6,9 @@ import Card from "../ContentLandingPage/Card/Card.js";
 import card1img from "./img/card1-house-entry-vestaxx.jpg";
 import card2img from "./img/card2-kitchen-vestaxx.jpg";
 import card3img from "./img/card3-family-vestaxx.jpg";
+import MuiCard from '../ContentLandingPage/MuiCard/index.js';
 import Background from "../../assets/img/test.png";
+
 
 const Container = styled.div``;
 
@@ -82,6 +84,7 @@ const PictureDiv = styled.div`
   background-image: url(${Background});
   display: inline-block;
   vertical-align: top;
+
 `;
 
 const CardContainer = styled.div`
@@ -133,8 +136,9 @@ const ContentLandingPage = () => {
               text="Wussten Sie, dass Heizwärme gar nicht mehr den größten Teil der Energieflüsse in Einfamilienhäusern ausmacht? Viel höher sind zum Beispiel die Bedarfe an Warmwasser und Strom."
             />
           </CardContainer>
+          <MuiCard />
 
-          <Link to={"/Modellierung"}>
+          <Link to={'/Modellierung'}>
             <button className="pointer" type="submit">
               Legen Sie los!
             </button>

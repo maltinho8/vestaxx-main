@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const CardContainer = styled.div`
   min-width: 225px;
@@ -53,7 +53,7 @@ const SpaceHorizontalContainer = styled.div`
   margin-bottom: -8px;
 `;
 
-const Card = (props) => {
+const Card = props => {
   return (
     <CardContainer>
       <CardImg src={props.img}></CardImg>
@@ -65,7 +65,6 @@ const Card = (props) => {
           </SpaceHorizontalContainer>
 
           <br />
-          
         </DetailsContainer>
       </BottomContainer>
     </CardContainer>

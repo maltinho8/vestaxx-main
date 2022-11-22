@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Burger from "../Burger";
 import { NavLink as Link } from "react-router-dom";
 
+
 const Nav = styled.nav`
   background: #f2ecd4;
   height: 130px;
@@ -93,9 +94,11 @@ const NavBar = () => {
               target="_blank"
               rel="noreferrer"
               style={{
+
                 textDecoration: "none",
                 color: "orange",
                 fontWeight: "bold",
+
               }}
             >
               Kontakt
