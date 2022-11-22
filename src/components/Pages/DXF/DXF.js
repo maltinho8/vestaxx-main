@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import ContentLandingPage from "../../PagesContent/ContentLandingPage/index";
+import ContentDXF from "../../PagesContent/ContentDXF/index";
 
 const ContentContainer = styled.div`
   width: 100vw !important;
   margin: 0 auto;
 `;
 
-const Homepage = () => {
+const DXF = () => {
   return (
     <div>
       <ContentContainer>
-        <ContentLandingPage />
+        <ContentDXF />
       </ContentContainer>
     </div>
   );
 };
 
-export default Homepage;
+export default DXF;
