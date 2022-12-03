@@ -9,6 +9,7 @@ import 'react-animated-slider/build/horizontal.css';
 import './HouseSlider/index.css';
 import './HouseSlider/styles.css';
 import './index.css';
+import { Button } from '../../Button/Button';
 
 import houseBerlin from '../../assets/img/einstöckig/122E_4B_Grundriss.jpg';
 import houseBrandenburg from '../../assets/img/einstöckig/147E_5B_Grundriss.jpg';
@@ -31,43 +32,49 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 
 const Container = styled.div`
-  padding: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
   color: ${({ theme }) => theme.palette.text.light};
 `;
 
-const Headline = styled.h2`
+const Headline = styled.h3`
   line-height: 1;
   margin-bottom: 2rem;
-  color: black;
-  text-align: center;
+  color: darkorange;
 `;
 
 const Text = styled.div`
   font-size: 1rem;
-  color: black;
+  color: darkorange;
+  margin-bottom: 2rem;
+`;
+
+const TextButton = styled.div`
+  font-size: 1rem;
+  color: darkorange;
   margin-bottom: 2rem;
   text-align: center;
 `;
 
 const InputDiv = styled.div`
-  background-color: #191970;
-  border: 2px solid black;
+  background-color: darkorange;
+  border: 2px solid darkorange;
   padding: 1em;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-bottom: 2rem;
   margin-top: 1rem;
-  width: 100%important!;
+  width: 85% !important;
   height: auto;
 `;
 
 const InputDiv2 = styled.div`
-  background-color: grey;
-  border: 2px solid black;
+  background-color: darkorange;
+  border: 2px solid darkorange;
   padding: 1em;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-bottom: 2rem;
   margin-top: 1rem;
-  width: 100%;
+  width: 85% !important;
   height: auto;
 `;
 
@@ -659,8 +666,8 @@ const ContentModellierung = () => {
               <img
                 src={item.userProfile}
                 alt={item.user}
-                height={250}
-                width={250}
+                height={210}
+                width={210}
               />
             </div>
             <section>
@@ -685,30 +692,31 @@ const ContentModellierung = () => {
         ))}
       </Slider>
       <br />
+      <br />
+      <br />
       <Image>
-        <button
-          className="pointer"
-          type="submit"
-          onClick={() => setShow1(prev => !prev)}
-        >
-          Wählen Sie aus
-        </button>
+        <Button type="submit" onClick={() => setShow1(prev => !prev)}>
+          Auswahlmöglichkeiten
+        </Button>
+        <br />
+        <br />
+        <br />
       </Image>{' '}
       {show1 && (
         <div>
           <br />
-          <Text>
+          <TextButton>
             Wählen Sie den passenden Button für ihren Grundriss aus und starten
             Sie ihre Berechnung - oder fahren Sie weiter unten mit einer
             individuellen Berechnung fort!
-          </Text>
+          </TextButton>
           <Image>
             <div className="parent">
               <Link
                 to={'/HeizvergleichBerlin'}
                 state={{ state: output, inputBerlin }}
               >
-                <button className="floated">Berlin</button>
+                <Button className="floated">Berlin</Button>
               </Link>
 
               <br />
@@ -717,7 +725,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichHessen'}
                 state={{ state: output, inputHessen }}
               >
-                <button className="floated">Hessen</button>
+                <Button className="floated">Hessen</Button>
               </Link>
 
               <br />
@@ -726,7 +734,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichBayern'}
                 state={{ state: output, inputBayern }}
               >
-                <button className="floated">Bayern</button>
+                <Button className="floated">Bayern</Button>
               </Link>
               <br />
 
@@ -734,7 +742,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichBrandenburg'}
                 state={{ state: output, inputBrandenburg }}
               >
-                <button className="floated">Brandenburg</button>
+                <Button className="floated">Brandenburg</Button>
               </Link>
               <br />
 
@@ -742,7 +750,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichMecklenburg'}
                 state={{ state: output, inputMecklenburg }}
               >
-                <button className="floated">Mecklenburg-Vorpommern</button>
+                <Button className="floated">Mecklenburg-Vorpommern</Button>
               </Link>
               <br />
 
@@ -750,7 +758,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichBaden'}
                 state={{ state: output, inputBaden }}
               >
-                <button className="floated">Baden-Württemberg</button>
+                <Button className="floated">Baden-Württemberg</Button>
               </Link>
             </div>
           </Image>
@@ -763,7 +771,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichThueringen'}
                 state={{ state: output, inputThueringen }}
               >
-                <button className="floated">Thüringen</button>
+                <Button className="floated">Thüringen</Button>
               </Link>
 
               <br />
@@ -772,7 +780,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichRheinland'}
                 state={{ state: output, inputRheinland }}
               >
-                <button className="floated">Rheinland-Pfalz</button>
+                <Button className="floated">Rheinland-Pfalz</Button>
               </Link>
 
               <br />
@@ -781,7 +789,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichNordrhein'}
                 state={{ state: output, inputNordrhein }}
               >
-                <button className="floated">Nordrhein-Westfalen</button>
+                <Button className="floated">Nordrhein-Westfalen</Button>
               </Link>
               <br />
 
@@ -789,7 +797,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichSaarland'}
                 state={{ state: output, inputSaarland }}
               >
-                <button className="floated">Saarland</button>
+                <Button className="floated">Saarland</Button>
               </Link>
               <br />
 
@@ -797,7 +805,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichNiedersachsen'}
                 state={{ state: output, inputNiedersachsen }}
               >
-                <button className="floated">Niedersachsen</button>
+                <Button className="floated">Niedersachsen</Button>
               </Link>
               <br />
 
@@ -805,7 +813,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichSchleswig'}
                 state={{ state: output, inputSchleswig }}
               >
-                <button className="floated">Schleswig-Holstein</button>
+                <Button className="floated">Schleswig-Holstein</Button>
               </Link>
             </div>
           </Image>
@@ -818,7 +826,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichBremen'}
                 state={{ state: output, inputBremen }}
               >
-                <button className="floated">Bremen</button>
+                <Button className="floated">Bremen</Button>
               </Link>
 
               <br />
@@ -827,7 +835,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichHamburg'}
                 state={{ state: output, inputHamburg }}
               >
-                <button className="floated">Hamburg</button>
+                <Button className="floated">Hamburg</Button>
               </Link>
 
               <br />
@@ -836,7 +844,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichSachsen'}
                 state={{ state: output, inputSachsen }}
               >
-                <button className="floated">Sachsen</button>
+                <Button className="floated">Sachsen</Button>
               </Link>
               <br />
 
@@ -844,7 +852,7 @@ const ContentModellierung = () => {
                 to={'/HeizvergleichSachsenAnhalt'}
                 state={{ state: output, inputSachsenAnhalt }}
               >
-                <button className="floated">Sachsen-Anhalt</button>
+                <Button className="floated">Sachsen-Anhalt</Button>
               </Link>
               <br />
             </div>
@@ -852,11 +860,12 @@ const ContentModellierung = () => {
         </div>
       )}
       <br />
+      <Headline>Eingabeformular</Headline>
       <form onSubmit={handleSubmit}>
         <InputDiv>
           <h5>
-            Gebäudedaten und Standort{' '}
-            <FontAwesomeIcon icon={solid('house-chimney-window')} />
+            <FontAwesomeIcon icon={solid('house-chimney-window')} /> &nbsp;
+            Gebäudedaten und Standort
           </h5>
 
           <InputFieldText>
@@ -1018,7 +1027,7 @@ const ContentModellierung = () => {
        */}
 
         <Image>
-          <button className="pointer" onClick={() => setShow(prev => !prev)}>
+          <Button className="pointer" onClick={() => setShow(prev => !prev)}>
             {' '}
             <div className="tooltip">
               {' '}
@@ -1029,12 +1038,12 @@ const ContentModellierung = () => {
                 Angaben tätigen. Das empfehlen wir vor allem Experten.
               </span>
             </div>{' '}
-          </button>{' '}
+          </Button>{' '}
         </Image>
         {show && (
           <InputDiv2>
             <h5>
-              Technische Daten <FontAwesomeIcon icon={solid('wrench')} />
+              <FontAwesomeIcon icon={solid('wrench')} /> &nbsp; Technische Daten
             </h5>
 
             <InputFieldText>
@@ -1105,7 +1114,7 @@ const ContentModellierung = () => {
             />
 
             <h5>
-              Daten Heizsystem <FontAwesomeIcon icon={solid('fire')} />
+              <FontAwesomeIcon icon={solid('fire')} /> &nbsp; Daten Heizsystem
             </h5>
             <InputFieldText>
               <span className="tooltip">
@@ -1145,7 +1154,7 @@ const ContentModellierung = () => {
               data={['TWW-Wärmepumpe', 'Durchlauferhitzer']}
             />
             <h5>
-              Daten PV <FontAwesomeIcon icon={solid('solar-panel')} />
+              <FontAwesomeIcon icon={solid('solar-panel')} /> &nbsp; Daten PV
             </h5>
             <InputFieldText>
               <span className="tooltip">
@@ -1331,8 +1340,8 @@ kann. </span>
               min={0}
       />*/}
             <h5>
-              Daten Preise{' '}
-              <FontAwesomeIcon icon={solid('hand-holding-dollar')} />
+              <FontAwesomeIcon icon={solid('hand-holding-dollar')} /> &nbsp;
+              Daten Preise
             </h5>
             <InputFieldText>Strompreis in [€/kWh]</InputFieldText>
             <NumberPicker
@@ -1381,9 +1390,9 @@ kann. </span>
 
         <Image>
           <Link to={'/Heizvergleich'} state={{ state: input, output }}>
-            <button disabled={!validate()} className="pointer" type="submit">
+            <Button disabled={!validate()} className="pointer" type="submit">
               Starten Sie Sie Ihre persönliche Berechnung
-            </button>
+            </Button>
           </Link>
         </Image>
       </form>

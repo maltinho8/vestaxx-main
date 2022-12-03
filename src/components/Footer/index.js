@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Box = styled.div`
-  background-color: black;
+  background-color: #f2ecd4;
   position: sticky;
-
   top: 0;
   width: 100%;
   border-top: 1px solid white;
@@ -28,7 +27,7 @@ const Column = styled.div`
 
 const Row2 = styled.div`
   display: flex;
-  grid-gap: 20px;
+  grid-gap: 50px;
   justify-content: center;
   width: 100%;
   margin-left: 0rem;
@@ -37,7 +36,7 @@ const Row2 = styled.div`
 
 const HeadingTwo = styled.p`
   font-size: 18px;
-  color: #fff;
+  color: darkorange;
   margin-bottom: 20px;
   font-weight: bold;
   @media (max-width: 768px) {
@@ -61,25 +60,30 @@ const Footer = () => {
           <Row2>
             <Column>
               <HeadingTwo>
-                <a href="https://www.vestaxx.de/">
-                  <font color="#ffffff">vestaxx GmbH</font>
+                <a
+                  href="https://www.vestaxx.de/impressum.php"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                >
+                  <font color="darkorange">Impressum</font>
+                </a>
+                <a
+                  href="https://www.vestaxx.de/datenschutz.php"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                >
+                  <font color="darkorange">Datenschutz</font>
                 </a>
               </HeadingTwo>
             </Column>
             <Column>
-              <HeadingTwo>
-                {' '}
-                <a href="https://www.vestaxx.de/impressum.php">
-                  <font color="#ffffff">Impressum</font>
-                </a>{' '}
-                |{' '}
-                <a href="https://www.vestaxx.de/datenschutz.php">
-                  <font color="#ffffff">Datenschutz</font>
-                </a>{' '}
-              </HeadingTwo>
-            </Column>
-            <Column>
-              <HeadingTwo>Copyright 2022 © Vestaxx GmbH</HeadingTwo>
+              <HeadingTwo>©vestaxx</HeadingTwo>
             </Column>
           </Row2>
         </RowContainer>

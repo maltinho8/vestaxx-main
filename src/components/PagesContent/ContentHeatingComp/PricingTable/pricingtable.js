@@ -8,6 +8,46 @@ export const Snip1214 = styled.div`
   max-width: 1000px;
   margin: 30px 10px;
   position: center;
+  border-radius: 10px;
+
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    padding: 20px 10px 20px;
+    padding: 10px 10px 10px;
+    margin-top: 0;
+  }
+`;
+
+export const ChoiceDiv = styled.div`
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px 10px;
+  position: center;
+  border-radius: 10px;
+
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    padding: 20px 10px 20px;
+    padding: 10px 10px 10px;
+    margin-top: 0;
+  }
+`;
+
+export const Snip1214Tabelle = styled.div`
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  max-width: 1000px;
+  position: center;
+  border-radius: 10px;
 
   @media only screen and (min-width: 768px) {
     width: 100%;
@@ -24,8 +64,7 @@ export const Plan = styled.div`
   width: 180px;
   position: relative;
   display: inline-block;
-  background-color: #ffffff;
-
+  background-color: transparent;
   &.featured {
     margin-top: -10px;
     z-index: 1;
@@ -47,13 +86,53 @@ export const Plan = styled.div`
   }
 `;
 
+export const PlanTabelle = styled.div`
+  margin: 0;
+  width: 180px;
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  border-radius: 10px;
+  &.featured {
+    margin-top: -10px;
+    z-index: 1;
+  }
+
+  &.checkbox {
+    > * {
+      border: darkorange !important;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    padding: 20px 10px 20px;
+    padding: 10px 10px 10px;
+    margin-top: 0;
+  }
+`;
+
 export const PlanTitle = styled.div`
   height: 50px;
   padding: 0px 10px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid darkorange;
+  border-radius: 10px;
 
   &.featured {
     padding: 10px 10px 20px;
+    background-color: var(--lightyellow);
+  }
+`;
+
+export const PlanTitleTabelle = styled.div`
+  height: 50px;
+  padding: 0px 10px 20px;
+  border-radius: 10px;
+  border: 1px solid darkorange;
+
+  &.featured {
     background-color: var(--lightyellow);
   }
 `;
@@ -64,15 +143,29 @@ export const PlanFeatures = styled.ul`
   text-align: center;
   list-style: outside none none;
   font-size: 0.8em;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid darkorange;
+  border-radius: 10px;
 
   &.featured {
     background-color: var(--lightyellow);
   }
 `;
 
+export const PlanFeaturesTabelle = styled.ul`
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  list-style: outside none none;
+  font-size: 0.8em;
+  border: 1px solid darkorange;
+  border-radius: 10px;
+  &.featured {
+    background-color: var(--lightyellow);
+  }
+`;
+
 export const ListItem = styled.li`
-  border-top: 1px solid #d2d7e2;
+  border-top: 1px solid darkorange;
   padding: 10px 5%;
 
   &.noborder {
@@ -80,16 +173,42 @@ export const ListItem = styled.li`
   }
 `;
 
+export const ListItemTabelle = styled.li`
+  border-top: 1px solid darkorange;
+  padding: 10px 5%;
+  border-radius: 10px;
+  &.noborder {
+    border-top: transparent;
+  }
+`;
+
 export const ListImg = styled.img`
-  height: 105px;
-  width: 157px;
+  height: 85px;
+  width: 125px;
+  border-radius: 10px;
   padding-bottom: 5px;
+`;
+
+export const ListImgTabelle = styled.img`
+  height: 85px;
+  width: 125px;
+  border-radius: 10px !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 export const ListPrice = styled.div`
   font-size: 1.5em;
 `;
 
+export const ListPriceTabelle = styled.div`
+  font-size: 1.5em;
+`;
+
 export const ListText = styled.div`
+  font-size: 0.8em;
+`;
+
+export const ListTextTabelle = styled.div`
   font-size: 0.8em;
 `;

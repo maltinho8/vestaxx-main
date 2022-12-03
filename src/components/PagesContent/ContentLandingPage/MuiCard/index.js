@@ -29,33 +29,33 @@ const useStyles = makeStyles(() => ({
     },
   },
   card: ({ color }) => ({
-    minWidth: 256,
-    borderRadius: 16,
+    minWidth: 195,
+    borderRadius: 5,
     boxShadow: 'none',
+    borderColor: '1px solid darkorange',
     '&:hover': {
-      boxShadow: `0 6px 12px 0 ${Color(color)
+      boxShadow: `0 6px 10px 0 ${Color(color)
         .rotate(-12)
         .darken(0.2)
-        .fade(0.5)}`,
+        .fade(0.2)}`,
     },
   }),
-  content: ({ color }) => {
+  content: () => {
     return {
-      backgroundColor: color,
+      backgroundColor: 'white',
       padding: '1rem 1.5rem 1.5rem',
     };
   },
   title: {
-    fontFamily: 'Keania One',
-    fontSize: '2rem',
-    color: '#fff',
+    fontSize: '1rem',
+    color: 'darkorange',
     textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   subtitle: {
-    fontFamily: 'Montserrat',
-    color: '#fff',
+    color: 'darkorange',
     opacity: 0.87,
-    marginTop: '2rem',
+    marginTop: '1.1rem',
     fontWeight: 500,
     fontSize: 14,
   },
@@ -80,10 +80,9 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
 
 export const SolidGameCardDemo = React.memo(function SolidGameCard() {
   const gridStyles = useGridStyles();
-  const styles = useStyles({ color: '#203f52' });
-  const styles2 = useStyles({ color: '#4d137f' });
-  const styles3 = useStyles({ color: '#ff9900' });
-  const styles4 = useStyles({ color: '#34241e' });
+  const styles = useStyles({ color: 'darkorange' });
+  const styles2 = useStyles({ color: 'darkorange' });
+  const styles3 = useStyles({ color: 'darkorange' });
   return (
     <>
       <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
@@ -91,7 +90,7 @@ export const SolidGameCardDemo = React.memo(function SolidGameCard() {
           <CustomCard
             classes={styles}
             title={'Innovation'}
-            subtitle={'Be a Legend!'}
+            subtitle={'vestaxx'}
             image={card1img}
           />
         </Grid>
@@ -99,7 +98,7 @@ export const SolidGameCardDemo = React.memo(function SolidGameCard() {
           <CustomCard
             classes={styles2}
             title={'Planung'}
-            subtitle={'Time to choose side!'}
+            subtitle={'vestaxx'}
             image={card2img}
           />
         </Grid>
@@ -107,7 +106,7 @@ export const SolidGameCardDemo = React.memo(function SolidGameCard() {
           <CustomCard
             classes={styles3}
             title={'Heizung'}
-            subtitle={'What are you waiting?'}
+            subtitle={'vestaxx'}
             image={card3img}
           />
         </Grid>

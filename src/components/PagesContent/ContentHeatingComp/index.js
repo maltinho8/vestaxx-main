@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import {
   Snip1214,
+  ChoiceDiv,
   Plan,
   PlanTitle,
   PlanFeatures,
@@ -10,10 +11,19 @@ import {
   ListImg,
   ListPrice,
   ListText,
+  Snip1214Tabelle,
+  PlanTabelle,
+  PlanTitleTabelle,
+  PlanFeaturesTabelle,
+  ListItemTabelle,
+  ListImgTabelle,
+  ListPriceTabelle,
+  ListTextTabelle,
 } from './PricingTable/pricingtable.js';
 import { MuiAccordion } from './Accordion/accordion.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../ContentModellierung/index.css';
+import { Button } from '../../Button/Button.js';
 // images
 import gas from './img/gas.jpg';
 import woodpellets from './img/woodpellets.jpg';
@@ -64,12 +74,12 @@ const Container = styled.div`
 const Headline = styled.h2`
   line-height: 1;
   margin-bottom: 2rem;
-  color: black;
+  color: darkorange;
 `;
 
 const Text = styled.div`
   font-size: 1rem;
-  color: black;
+  color: darkorange;
   margin-bottom: 0.8rem;
   text-align: justify;
 
@@ -80,15 +90,9 @@ const Text = styled.div`
   }
 `;
 
-const HR = styled.hr`
-  margin: 1em;
-  height: 1px;
-  background-color: black;
-`;
-
 const ChartLabel = styled.div`
   font-size: 0.8rem;
-  color: black;
+  color: darkorange;
   margin-left: 0.5em;
   margin-right: 0.5em;
 `;
@@ -115,16 +119,37 @@ const FlexSpaceBetween = styled.div`
   }
 `;
 
-const TopSectionImage = styled.img`
-  max-width: 400px;
-  max-heigt: 300px;
+const TopWrapper = styled.div`
   border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 50px;
+`;
+
+const ResultDiv = styled.div`
+  width: 220px;
+  height: 220px;
+  border: 3px solid white;
+  border-radius: 5px;
+  background-color: darkorange;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+`;
+
+const PictureDiv = styled.div`
+  width: 220px;
+  height: 220px;
+  border: 3px solid darkorange;
+  border-radius: 5px;
+  background-image: url(${gas});
+  display: inline-block;
+  vertical-align: top;
 `;
 
 const GreyBox = styled.div`
-  color: black;
-  background-color: #d9d9d9;
-
+  color: white;
+  background-color: darkorange;
   margin-bottom: 2rem;
   padding: 1em;
   border-radius: 5px;
@@ -137,7 +162,7 @@ const GreyBoxTable = styled.table`
 `;
 
 const TR = styled.tr`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 30px solid transparent;
 `;
 
 const TdRight = styled.td`
@@ -358,14 +383,14 @@ const ContentHeatingComp = props => {
   return (
     <Container>
       <Link to={'/Modellierung'}>
-        <button className="button-77">Zurück zur Auswahl</button>
+        <Button>Zurück zur Auswahl</Button>
       </Link>
       <Headline>Vergleichsrechnung</Headline>
       <Text>
         Hier erfahren Sie, welches Heizsystem für dieses Haus optimal ist!
       </Text>
-      <FlexSpaceBetween>
-        <GreyBox>
+      <TopWrapper>
+        <ResultDiv>
           <GreyBoxTable>
             <tbody>
               <TR>
@@ -388,13 +413,11 @@ const ContentHeatingComp = props => {
               </tr>
             </tbody>
           </GreyBoxTable>
-        </GreyBox>
-        <TopSectionImage src="https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></TopSectionImage>
-      </FlexSpaceBetween>
+        </ResultDiv>
+        <PictureDiv />
+      </TopWrapper>
 
-      <HR></HR>
-
-      <Snip1214>
+      <ChoiceDiv>
         <Text className="centered">
           Welche Heizsysteme möchten Sie mit den Vestaxx Heizfenstern
           vergleichen?
@@ -460,142 +483,144 @@ const ContentHeatingComp = props => {
             </ListItem>
           </PlanFeatures>
         </Plan>
-      </Snip1214>
+      </ChoiceDiv>
 
-      <Snip1214>
+      <Snip1214Tabelle>
         <Text className="centered">
           Zu errichtendes Gebäude mit verschiedenen Heizsystemen
         </Text>
         {showWoodPellet && (
-          <Plan>
-            <PlanTitle>Holzpellet-System</PlanTitle>
-            <PlanFeatures>
-              <ListImg src={woodpellets}></ListImg>
-              <ListItem>
-                <ListPrice>
+          <PlanTabelle>
+            <PlanTitleTabelle>Holzpellet-System</PlanTitleTabelle>
+            <PlanFeaturesTabelle>
+              <ListImgTabelle src={woodpellets}></ListImgTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.investitionHolzpelletSystem?.toFixed(2)} €
-                </ListPrice>
-                <ListText>Investitionskosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Investitionskosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtEnergiekostenHolzpelletSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamt-Energiekosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtAnnuitaetHolzpelletSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamtannuität</ListText>
-              </ListItem>
-            </PlanFeatures>
-          </Plan>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+              </ListItemTabelle>
+            </PlanFeaturesTabelle>
+          </PlanTabelle>
         )}
         {showHeatPump && (
-          <Plan>
-            <PlanTitle>Wärmepumpen-System</PlanTitle>
-            <PlanFeatures>
-              <ListImg src={heatpump}></ListImg>
-              <ListItem>
-                <ListPrice>
+          <PlanTabelle>
+            <PlanTitleTabelle>Wärmepumpen-System</PlanTitleTabelle>
+            <PlanFeaturesTabelle>
+              <ListImgTabelle src={heatpump}></ListImgTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.investitionWaermepumpenSystem?.toFixed(2)} €
-                </ListPrice>
-                <ListText>Investitionskosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Investitionskosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtEnergiekostenWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamt-Energiekosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtAnnuitaetWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamtannuität</ListText>
-              </ListItem>
-            </PlanFeatures>
-          </Plan>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+              </ListItemTabelle>
+            </PlanFeaturesTabelle>
+          </PlanTabelle>
         )}
         {showBrineWater && (
-          <Plan>
-            <PlanTitle>Sole-Wasser-Wärmepumpen-System</PlanTitle>
-            <PlanFeatures>
-              <ListImg src={brinewater}></ListImg>
-              <ListItem>
-                <ListPrice>
+          <PlanTabelle>
+            <PlanTitleTabelle>Sole-Wasser-Wärmepumpen-System</PlanTitleTabelle>
+            <PlanFeaturesTabelle>
+              <ListImgTabelle src={brinewater}></ListImgTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.investitionSwWaermepumpenSystem?.toFixed(2)} €
-                </ListPrice>
-                <ListText>Investitionskosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Investitionskosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtEnergiekostenSwWaermepumpenSystem?.toFixed(2)}{' '}
                   €/a
-                </ListPrice>
-                <ListText>Gesamt-Energiekosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtAnnuitaetSwWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamtannuität</ListText>
-              </ListItem>
-            </PlanFeatures>
-          </Plan>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+              </ListItemTabelle>
+            </PlanFeaturesTabelle>
+          </PlanTabelle>
         )}
-        <Plan className="featured">
-          <PlanTitle className="featured">Vestaxx Heizfenster</PlanTitle>
-          <PlanFeatures className="featured">
-            <ListImg src={vestaxx}></ListImg>
-            <ListItem>
-              <ListPrice>
+        <PlanTabelle className="featured">
+          <PlanTitleTabelle className="featured">
+            Vestaxx Heizfenster
+          </PlanTitleTabelle>
+          <PlanFeaturesTabelle className="featured">
+            <ListImgTabelle src={vestaxx}></ListImgTabelle>
+            <ListItemTabelle>
+              <ListPriceTabelle>
                 {output.investitionHeizfensterSystem?.toFixed(2)} €
-              </ListPrice>
-              <ListText>Investitionskosten</ListText>
-            </ListItem>
-            <ListItem>
-              <ListPrice>
+              </ListPriceTabelle>
+              <ListTextTabelle>Investitionskosten</ListTextTabelle>
+            </ListItemTabelle>
+            <ListItemTabelle>
+              <ListPriceTabelle>
                 {output.gesamtStromkostenHeizfenster?.toFixed(2)} €/a
-              </ListPrice>
-              <ListText>Gesamt-Energiekosten</ListText>
-            </ListItem>
-            <ListItem>
-              <ListPrice>
+              </ListPriceTabelle>
+              <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+            </ListItemTabelle>
+            <ListItemTabelle>
+              <ListPriceTabelle>
                 {output.gesamtAnnuitaetHeizfensterMitAnrechnung?.toFixed(2)} €/a
-              </ListPrice>
-              <ListText>Gesamtannuität</ListText>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
+              </ListPriceTabelle>
+              <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+            </ListItemTabelle>
+          </PlanFeaturesTabelle>
+        </PlanTabelle>
         {showGas && (
-          <Plan>
-            <PlanTitle>Erdgas-Brennwert-System</PlanTitle>
-            <PlanFeatures>
-              <ListImg src={gas}></ListImg>
-              <ListItem>
-                <ListPrice>
+          <PlanTabelle>
+            <PlanTitleTabelle>Erdgas-Brennwert-System</PlanTitleTabelle>
+            <PlanFeaturesTabelle>
+              <ListImgTabelle src={gas}></ListImgTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.investitionErgasBwSystem?.toFixed(2)} €
-                </ListPrice>
-                <ListText>Investitionskosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Investitionskosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtEnergiekostenErgasBwSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamt-Energiekosten</ListText>
-              </ListItem>
-              <ListItem>
-                <ListPrice>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+              </ListItemTabelle>
+              <ListItemTabelle>
+                <ListPriceTabelle>
                   {output.gesamtAnnuitaetErgasBwSystem?.toFixed(2)} €/a
-                </ListPrice>
-                <ListText>Gesamtannuität</ListText>
-              </ListItem>
-            </PlanFeatures>
-          </Plan>
+                </ListPriceTabelle>
+                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+              </ListItemTabelle>
+            </PlanFeaturesTabelle>
+          </PlanTabelle>
         )}
-      </Snip1214>
+      </Snip1214Tabelle>
 
       <FlexCenter>
         <BoldTitle>Investitionskosten der verschiedenen Heizsysteme</BoldTitle>

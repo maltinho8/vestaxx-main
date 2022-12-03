@@ -10,7 +10,11 @@ export const MuiAccordion = props => {
   return (
     <div>
       <Accordion
-        sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', borderRadius: 1 }}
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: 1,
+        }}
         expanded={expanded === 'panel1'}
         onChange={(event, isExpanded) => handleChange(isExpanded, 'panel1')}
       >
@@ -29,7 +33,11 @@ export const MuiAccordion = props => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', borderRadius: 1 }}
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: 1,
+        }}
         expanded={expanded === 'panel2'}
         onChange={(event, isExpanded) => handleChange(isExpanded, 'panel2')}
       >
@@ -48,7 +56,11 @@ export const MuiAccordion = props => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', borderRadius: 1 }}
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: 1,
+        }}
         expanded={expanded === 'panel3'}
         onChange={(event, isExpanded) => handleChange(isExpanded, 'panel3')}
       >
@@ -67,7 +79,11 @@ export const MuiAccordion = props => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', borderRadius: 1 }}
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: 1,
+        }}
         expanded={expanded === 'panel4'}
         onChange={(event, isExpanded) => handleChange(isExpanded, 'panel4')}
       >
@@ -86,7 +102,11 @@ export const MuiAccordion = props => {
         </AccordionDetails>
       </Accordion>
       <Accordion
-        sx={{ backgroundColor: '#D9D9D9', boxShadow: 'none', borderRadius: 1 }}
+        sx={{
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: 1,
+        }}
         expanded={expanded === 'panel5'}
         onChange={(event, isExpanded) => handleChange(isExpanded, 'panel5')}
       >

@@ -6,7 +6,7 @@ const Ul = styled.div`
   @media (max-width: 900px) {
     width: 100vw !important;
     flex-flow: column nowrap;
-    background-color: black;
+    background-color: #f2ecd4;
     background-size: cover;
     background-position: center;
     position: fixed;

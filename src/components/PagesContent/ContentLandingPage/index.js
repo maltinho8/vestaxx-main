@@ -1,14 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import "./index.css";
-import { Link } from "react-router-dom";
-import Card from "../ContentLandingPage/Card/Card.js";
-import card1img from "./img/card1-house-entry-vestaxx.jpg";
-import card2img from "./img/card2-kitchen-vestaxx.jpg";
-import card3img from "./img/card3-family-vestaxx.jpg";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import MuiCard from '../ContentLandingPage/MuiCard/index.js';
-import Background from "../../assets/img/test.png";
-
+import Background from '../../assets/img/test.png';
+import { Button } from '../../Button/Button.js';
 
 const Container = styled.div``;
 
@@ -19,8 +14,8 @@ const BackgroundContainer = styled.div`
 
 const ContentContainer = styled.div`
   margin-top: 5rem;
-  margin-left: 15rem;
-  margin-right: 15rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
   margin-bottom: 5rem;
   @media screen and (max-width: 768px) {
     margin-left: 3rem;
@@ -41,19 +36,12 @@ const Boxes = styled.div`
 const Headline = styled.h3`
   text-align: center;
   vertical-align: middle;
-  line-height: 520px;
-  color: darkorange;
-`;
-
-const SubHeadline = styled.h5`
-  text-align: center;
-  vertical-align: middle;
-  line-height: 520px;
+  line-height: 420px;
   color: darkorange;
 `;
 
 const IntroText = styled.p`
-  color: orange;
+  color: darkorange;
   text-align: justify;
   text-justify: inter-word;
   font-weight: bold;
@@ -62,13 +50,13 @@ const IntroText = styled.p`
 
 const TopWrapper = styled.div`
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 50px;
   text-align: center;
 `;
 
 const HeadlineDiv = styled.div`
-  width: 520px;
-  height: 520px;
+  width: 420px;
+  height: 420px;
   border: 3px solid white;
   border-radius: 5px;
   background-color: white;
@@ -77,14 +65,13 @@ const HeadlineDiv = styled.div`
 `;
 
 const PictureDiv = styled.div`
-  width: 520px;
-  height: 520px;
+  width: 420px;
+  height: 420px;
   border: 3px solid darkorange;
   border-radius: 5px;
   background-image: url(${Background});
   display: inline-block;
   vertical-align: top;
-
 `;
 
 const CardContainer = styled.div`
@@ -96,6 +83,11 @@ const CardContainer = styled.div`
     flex-direction: column;
     align-content: center;
   }
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const ContentLandingPage = () => {
@@ -123,26 +115,13 @@ const ContentLandingPage = () => {
         </ContentContainer>
         <ContentContainer>
           <CardContainer>
-            <Card
-              img={card1img}
-              text="Eine neue und innovative Art zu heizen sind die mit Strom betriebenen Heizscheiben von Vestaxx. Der Strom erzeugt Infrarotstrahlen, mit denen gleichmäßig Wände, Möbel und Körper erwärmt werden."
-            />
-            <Card
-              img={card2img}
-              text="Mit nur wenigen Angaben zu Ihrem Traumhaus schlagen wir passende Grundrisse vor und stellen eine erste Vergleichsrechnung für Heizsysteme bereit."
-            />
-            <Card
-              img={card3img}
-              text="Wussten Sie, dass Heizwärme gar nicht mehr den größten Teil der Energieflüsse in Einfamilienhäusern ausmacht? Viel höher sind zum Beispiel die Bedarfe an Warmwasser und Strom."
-            />
+            <MuiCard />
           </CardContainer>
-          <MuiCard />
-
-          <Link to={'/Modellierung'}>
-            <button className="pointer" type="submit">
-              Legen Sie los!
-            </button>
-          </Link>
+          <ButtonContainer>
+            <Link to={'/Modellierung'}>
+              <Button>Legen Sie los!</Button>
+            </Link>
+          </ButtonContainer>
         </ContentContainer>
       </BackgroundContainer>
     </Container>

@@ -4,18 +4,9 @@
   cursor: pointer;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
 .parent {
   display: flex;
   align-items: center;
-}
-
-.button-77:disabled {
-  cursor: default;
-  opacity: 0.24;
 }
 
 /* Tooltip container */

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Text = styled(Link)`
-  color: ${({ theme }) => theme.palette.text.light};
+  color: darkorange;
   font-size: 1rem;
   margin-left: 10rem;
   font-weight: 500;
@@ -49,11 +49,11 @@ const Content = ({ closeMenu }) => {
         to="/Modellierung"
         style={{ textDecoration: 'none', color: 'white' }}
       >
-        3D-Modellierung
+        Heizvergleich
       </Text>
       <br />
       <br />
-      <p style={{ color: 'white' }}>
+      <p style={{ color: 'darkorange' }}>
         Mit unserer Expertise heben wir Heizen auf ein neues Level.
       </p>
     </Container>
