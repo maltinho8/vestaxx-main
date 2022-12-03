@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import ContentLandingPage from "../../PagesContent/ContentLandingPage/index";
+import React from 'react';
+import styled from 'styled-components';
+import ContentLandingPage from '../../PagesContent/ContentLandingPage/index';
 
 const ContentContainer = styled.div`
   width: 100vw !important;
