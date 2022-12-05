@@ -70,6 +70,10 @@ const Footer = () => {
                 >
                   <font color="darkorange">Impressum</font>
                 </a>
+              </HeadingTwo>
+            </Column>
+            <Column>
+              <HeadingTwo>
                 <a
                   href="https://www.vestaxx.de/datenschutz.php"
                   target="_blank"

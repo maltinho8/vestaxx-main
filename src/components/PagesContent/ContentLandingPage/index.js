@@ -87,7 +87,10 @@ const CardContainer = styled.div`
 
 const ButtonContainer = styled.div`
   width: 100%;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 70px;
 `;
 
 const ContentLandingPage = () => {

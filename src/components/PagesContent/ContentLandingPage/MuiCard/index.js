@@ -25,25 +25,23 @@ const useStyles = makeStyles(() => ({
     borderRadius: 16,
     transition: '0.2s',
     '&:hover': {
-      transform: 'scale(1.1)',
+      transform: 'scale(1)',
     },
   },
   card: ({ color }) => ({
     minWidth: 195,
     borderRadius: 5,
     boxShadow: 'none',
-    borderColor: '1px solid darkorange',
+    border: '2px solid darkorange',
     '&:hover': {
-      boxShadow: `0 6px 10px 0 ${Color(color)
-        .rotate(-12)
-        .darken(0.2)
-        .fade(0.2)}`,
+      boxShadow: `0 6px 6px 0 ${Color(color).rotate(-2).darken(0.2).fade(0.2)}`,
     },
   }),
   content: () => {
     return {
-      backgroundColor: 'white',
+      backgroundColor: '#f2ecd4',
       padding: '1rem 1.5rem 1.5rem',
+      borderTop: '2px solid darkorange',
     };
   },
   title: {
@@ -51,6 +49,7 @@ const useStyles = makeStyles(() => ({
     color: 'darkorange',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   subtitle: {
     color: 'darkorange',
@@ -58,6 +57,7 @@ const useStyles = makeStyles(() => ({
     marginTop: '1.1rem',
     fontWeight: 500,
     fontSize: 14,
+    textAlign: 'center',
   },
 }));
 

@@ -48,14 +48,16 @@ const LogoHeadline = styled.h4`
 const NavBtn = styled.nav`
   display: flex;
   align-items: center;
-
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 const A = styled.a`
-  color: darkorange;
+  color: white;
+  &.hover {
+    color: darkorange;
+  }
 `;
 
 const NavBar = () => {

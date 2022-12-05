@@ -2,15 +2,11 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import {
-  Snip1214,
   ChoiceDiv,
   Plan,
   PlanTitle,
   PlanFeatures,
   ListItem,
-  ListImg,
-  ListPrice,
-  ListText,
   Snip1214Tabelle,
   PlanTabelle,
   PlanTitleTabelle,
@@ -67,8 +63,8 @@ ChartJS.register(
 );
 
 const Container = styled.div`
-  padding: 1rem;
-  color: ${({ theme }) => theme.palette.text.light};
+  padding-left: 3rem;
+  padding-right: 3rem;
 `;
 
 const Headline = styled.h2`
@@ -80,7 +76,7 @@ const Headline = styled.h2`
 const Text = styled.div`
   font-size: 1rem;
   color: darkorange;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   text-align: justify;
 
   &.centered {
@@ -103,43 +99,25 @@ const FlexCenter = styled.div`
   position: relative;
 `;
 
-const FloatRight = styled.div`
-  position: absolute;
-  right: 16px;
-`;
-
-const FlexSpaceBetween = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /*align-items: baseline;*/
-  /*align-items: flex-end;*/
-  > * {
-    margin: 1em;
-  }
-`;
-
 const TopWrapper = styled.div`
   border-radius: 5px;
-  margin-top: 20px;
-  text-align: center;
-  margin-bottom: 50px;
+  margin-top: 70px;
+  margin-bottom: 70px;
 `;
 
 const ResultDiv = styled.div`
-  width: 220px;
-  height: 220px;
-  border: 3px solid white;
+  width: 350px;
+  height: 270px;
+  border: 3px solid darkorange;
   border-radius: 5px;
   background-color: darkorange;
   display: inline-block;
-  vertical-align: top;
   color: white;
 `;
 
 const PictureDiv = styled.div`
-  width: 220px;
-  height: 220px;
+  width: 350px;
+  height: 270px;
   border: 3px solid darkorange;
   border-radius: 5px;
   background-image: url(${gas});
@@ -147,12 +125,17 @@ const PictureDiv = styled.div`
   vertical-align: top;
 `;
 
-const GreyBox = styled.div`
-  color: white;
-  background-color: darkorange;
-  margin-bottom: 2rem;
-  padding: 1em;
-  border-radius: 5px;
+const ChartDiv = styled.div`
+  margin: 0 auto;
+  width: 850px;
+`;
+
+const ButtonDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
 `;
 
 const GreyBoxTable = styled.table`
@@ -162,11 +145,17 @@ const GreyBoxTable = styled.table`
 `;
 
 const TR = styled.tr`
-  border-bottom: 30px solid transparent;
+  border-bottom: 20px solid transparent;
 `;
 
 const TdRight = styled.td`
+  text-align: left;
   padding-left: 10px;
+`;
+
+const TdLeft = styled.td`
+  text-align: left;
+  font-size: 0.8rem;
 `;
 
 const BoldTitle = styled(Text)`
@@ -385,6 +374,9 @@ const ContentHeatingComp = props => {
       <Link to={'/Modellierung'}>
         <Button>Zurück zur Auswahl</Button>
       </Link>
+      <Link to={'/Modellierung'}>
+        <Button>Downloadbereich</Button>
+      </Link>
       <Headline>Vergleichsrechnung</Headline>
       <Text>
         Hier erfahren Sie, welches Heizsystem für dieses Haus optimal ist!
@@ -394,23 +386,23 @@ const ContentHeatingComp = props => {
           <GreyBoxTable>
             <tbody>
               <TR>
-                <td>
+                <TdLeft>
                   Heizfläche in m<sup>2</sup>
-                </td>
+                </TdLeft>
                 <TdRight>{inputData.gebaeudeNutzflaeche}</TdRight>
               </TR>
               <TR>
-                <td>Anzahl Bewohner</td>
+                <TdLeft>Anzahl Bewohner</TdLeft>
                 <TdRight>{inputData.bewohnerAnzahl}</TdRight>
               </TR>
               <TR>
-                <td>Standort</td>
+                <TdLeft>Standort</TdLeft>
                 <TdRight>{capitalize(inputData?.bundesland)}</TdRight>
               </TR>
-              <tr>
-                <td>Beheizte Räume</td>
+              <TR>
+                <TdLeft>Beheizte Räume</TdLeft>
                 <TdRight>{inputData.anzahlBeheizterRaeume}</TdRight>
-              </tr>
+              </TR>
             </tbody>
           </GreyBoxTable>
         </ResultDiv>
@@ -425,7 +417,11 @@ const ContentHeatingComp = props => {
         <Plan className="checkbox">
           <PlanTitle>Holzpellet-System</PlanTitle>
           <PlanFeatures>
-            <ListImg src={woodpellets}></ListImg>
+            <FontAwesomeIcon
+              icon={solid('tree')}
+              size="5x"
+              color="darkorange"
+            />
             <ListItem className="noborder">
               <input
                 type="checkbox"
@@ -438,7 +434,11 @@ const ContentHeatingComp = props => {
         <Plan className="checkbox">
           <PlanTitle>Wärmepumpen-System</PlanTitle>
           <PlanFeatures>
-            <ListImg src={heatpump}></ListImg>
+            <FontAwesomeIcon
+              icon={solid('fire')}
+              size="5x"
+              color="darkorange"
+            />
             <ListItem className="noborder">
               <input
                 type="checkbox"
@@ -451,7 +451,11 @@ const ContentHeatingComp = props => {
         <Plan className="checkbox">
           <PlanTitle>Sole-Wasser-Wärmepumpen-System</PlanTitle>
           <PlanFeatures>
-            <ListImg src={brinewater}></ListImg>
+            <FontAwesomeIcon
+              icon={solid('water')}
+              size="5x"
+              color="darkorange"
+            />
             <ListItem className="noborder">
               <input
                 type="checkbox"
@@ -464,7 +468,11 @@ const ContentHeatingComp = props => {
         <Plan className="checkbox">
           <PlanTitle>Vestaxx Heizfenster</PlanTitle>
           <PlanFeatures>
-            <ListImg src={vestaxx}></ListImg>
+            <FontAwesomeIcon
+              icon={solid('water')}
+              size="5x"
+              color="darkorange"
+            />
             <ListItem className="noborder">
               <input type="checkbox" checked={true} disabled={true}></input>
             </ListItem>
@@ -473,7 +481,11 @@ const ContentHeatingComp = props => {
         <Plan className="checkbox">
           <PlanTitle>Erdgas-Brennwert-System</PlanTitle>
           <PlanFeatures>
-            <ListImg src={gas}></ListImg>
+            <FontAwesomeIcon
+              icon={solid('water')}
+              size="5x"
+              color="darkorange"
+            />
             <ListItem className="noborder">
               <input
                 type="checkbox"
@@ -484,6 +496,7 @@ const ContentHeatingComp = props => {
           </PlanFeatures>
         </Plan>
       </ChoiceDiv>
+      <br />
 
       <Snip1214Tabelle>
         <Text className="centered">
@@ -621,10 +634,12 @@ const ContentHeatingComp = props => {
           </PlanTabelle>
         )}
       </Snip1214Tabelle>
-
+      <br />
+      <br />
+      <br />
       <FlexCenter>
         <BoldTitle>Investitionskosten der verschiedenen Heizsysteme</BoldTitle>
-        <span className="tooltip" style={{ color: 'black' }}>
+        <span className="tooltip" style={{ color: 'darkorange' }}>
           <FontAwesomeIcon icon={solid('circle-question')} />
           <span className="tooltiptext">
             Die Investitionskosten eines Heizsystems sind die Kosten, die beim
@@ -633,9 +648,12 @@ const ContentHeatingComp = props => {
           </span>
         </span>
       </FlexCenter>
-      <Bar options={optionsInvestmentCost} data={dataInvestmentCost} />
+      <ChartDiv>
+        <Bar options={optionsInvestmentCost} data={dataInvestmentCost} />
+      </ChartDiv>
       <br />
-
+      <br />
+      <br />
       <FlexCenter>
         <BoldTitle>Details zu den Heizsystemen</BoldTitle>
       </FlexCenter>
@@ -652,12 +670,18 @@ const ContentHeatingComp = props => {
         details5="Beim Erdgas-Brennwertkessel-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch das Verbrennen von fossilem Erdgas in einem Brennwertkessel. Durch die Verbrennung von Erdgas wird dabei Wasser erhitzt, dass anschließend durch die Heizkörper in den Räumen fließt und das Haus erwärmt."
       ></MuiAccordion>
       <br />
-
+      <Headline>Diagrammauswahl</Headline>
+      <Text>
+        Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
+        Heizsystemvergleich.
+      </Text>
+      <br />
+      <br />
       <FlexCenter>
         <BoldTitle>
           GEG-Referenzgebäude im Vergleich mit den Heizsystemen
         </BoldTitle>
-        <span className="tooltip" style={{ color: 'black' }}>
+        <span className="tooltip" style={{ color: 'darkorange' }}>
           <FontAwesomeIcon icon={solid('circle-question')} />
           <span className="tooltiptext">
             Das GEG-Referenzgebäude ist ein virtuelles Hilfsgebäude, mit dessen
@@ -668,29 +692,16 @@ const ContentHeatingComp = props => {
             die Warmwasserbereitung.
           </span>
         </span>
-        <FloatRight>
-          {/* I bet there are more efficient ways to change the icons */}
-          {showGEG ? (
-            <FontAwesomeIcon
-              icon={solid('angle-up')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowGEG(prev => !prev)}
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={solid('angle-down')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowGEG(prev => !prev)}
-            />
-          )}
-        </FloatRight>
       </FlexCenter>
+      <ButtonDiv>
+        <Button onClick={() => setShowGEG(prev => !prev)}>Diagramm</Button>
+      </ButtonDiv>
       {showGEG && (
         <div>
           <br />
           <FlexCenter>
             <ChartLabel>Ökologischer Vergleich: Primärenergiebedarf</ChartLabel>
-            <span className="tooltip" style={{ color: 'black' }}>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
               <FontAwesomeIcon icon={solid('circle-question')} />
               <span className="tooltiptext">
                 Der Primärenergiebedarf ergibt sich aus der Multiplikation des
@@ -702,14 +713,15 @@ const ContentHeatingComp = props => {
               </span>
             </span>
           </FlexCenter>
-
-          <Bar options={optionsPrimaryEnergy} data={dataEcoPrimaryEnergy} />
+          <ChartDiv>
+            <Bar options={optionsPrimaryEnergy} data={dataEcoPrimaryEnergy} />
+          </ChartDiv>
           <br />
           <br />
 
           <FlexCenter>
             <ChartLabel>Ökologischer Vergleich: CO2-Emissionen</ChartLabel>
-            <span className="tooltip" style={{ color: 'black' }}>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
               <FontAwesomeIcon icon={solid('circle-question')} />
               <span className="tooltiptext">
                 CO2-Äquivalente sind eine Maßeinheit zur Vereinheitlichung der
@@ -725,8 +737,9 @@ const ContentHeatingComp = props => {
               </span>
             </span>
           </FlexCenter>
-
-          <Bar options={optionsCO2} data={dataEcoCO2} />
+          <ChartDiv>
+            <Bar options={optionsCO2} data={dataEcoCO2} />
+          </ChartDiv>
           <br />
           <br />
         </div>
@@ -736,7 +749,7 @@ const ContentHeatingComp = props => {
 
       <FlexCenter>
         <BoldTitle>Annuität der verschiedenen Heizsysteme</BoldTitle>
-        <span className="tooltip" style={{ color: 'black' }}>
+        <span className="tooltip" style={{ color: 'darkorange' }}>
           <FontAwesomeIcon icon={solid('circle-question')} />
           <span className="tooltiptext">
             Bei der Gesamtannuität handelt es sich um die jährlich notwendige
@@ -747,59 +760,39 @@ const ContentHeatingComp = props => {
             Jahre. Die Annuität bleibt über diesen gesamten Zeitraum konstant.
           </span>
         </span>
-        <FloatRight>
-          {showAnnuity ? (
-            <FontAwesomeIcon
-              icon={solid('angle-up')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowAnnuity(prev => !prev)}
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={solid('angle-down')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowAnnuity(prev => !prev)}
-            />
-          )}
-        </FloatRight>
       </FlexCenter>
+      <ButtonDiv>
+        <Button onClick={() => setShowAnnuity(prev => !prev)}>Diagramm</Button>
+      </ButtonDiv>
 
       {showAnnuity && (
         <div>
-          <Bar options={optionsAnnuity} data={dataAnnuity} />
+          <ChartDiv>
+            <Bar options={optionsAnnuity} data={dataAnnuity} />
+          </ChartDiv>
           <br />
         </div>
       )}
-
+      <br />
       <FlexCenter>
         <BoldTitle className="multiline">
           Jährliche Einsparungen durch Einsatz des Heizfenstersystems
           <br />
           im Vergleich zu den anderen Systemen
         </BoldTitle>
-        <FloatRight>
-          {/* I bet there are more efficient ways to change the icons */}
-          {showReduction ? (
-            <FontAwesomeIcon
-              icon={solid('angle-up')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowReduction(prev => !prev)}
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={solid('angle-down')}
-              style={{ color: 'rgba(0, 0, 0, 0.54)', paddingRight: '5px' }}
-              onClick={() => setShowReduction(prev => !prev)}
-            />
-          )}
-        </FloatRight>
       </FlexCenter>
+      <ButtonDiv>
+        <Button onClick={() => setShowReduction(prev => !prev)}>
+          Diagramm
+        </Button>
+      </ButtonDiv>
       {showReduction && (
         <div>
           <br />
+
           <FlexCenter>
             <ChartLabel>Jährliche Einsparung bei der Primärenergie</ChartLabel>
-            <span className="tooltip" style={{ color: 'black' }}>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
               <FontAwesomeIcon icon={solid('circle-question')} />
               <span className="tooltiptext">
                 Hier wird Ihnen angezeigt, wie viel Primärenergie Ihr
@@ -808,7 +801,12 @@ const ContentHeatingComp = props => {
               </span>
             </span>
           </FlexCenter>
-          <Bar data={dataReductionPrimary} options={optionsReductionPrimary} />
+          <ChartDiv>
+            <Bar
+              data={dataReductionPrimary}
+              options={optionsReductionPrimary}
+            />
+          </ChartDiv>
           <br />
           <br />
 
@@ -816,7 +814,7 @@ const ContentHeatingComp = props => {
             <ChartLabel>
               Jährliche Einsparung an CO2-Äquivalent-Emissionen
             </ChartLabel>
-            <span className="tooltip" style={{ color: 'black' }}>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
               <FontAwesomeIcon icon={solid('circle-question')} />
               <span className="tooltiptext">
                 Hier wird Ihnen angezeigt, wie viele CO2-Äquivalent-Emissionen
@@ -825,13 +823,15 @@ const ContentHeatingComp = props => {
               </span>
             </span>
           </FlexCenter>
-          <Bar options={optionsReductionCO2} data={dataReductionCO2} />
+          <ChartDiv>
+            <Bar options={optionsReductionCO2} data={dataReductionCO2} />
+          </ChartDiv>
           <br />
           <br />
 
           <FlexCenter>
             <ChartLabel>Reduzierung der Annuität</ChartLabel>
-            <span className="tooltip" style={{ color: 'black' }}>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
               <FontAwesomeIcon icon={solid('circle-question')} />
               <span className="tooltiptext">
                 Hier wird Ihnen angezeigt, um wie viel Euro die Gesamtannuität
@@ -841,11 +841,25 @@ const ContentHeatingComp = props => {
               </span>
             </span>
           </FlexCenter>
-          <Bar data={dataReductionAnnuity} options={optionsReductionAnnuity} />
+          <ChartDiv>
+            <Bar
+              data={dataReductionAnnuity}
+              options={optionsReductionAnnuity}
+            />
+          </ChartDiv>
+
           <br />
           <br />
         </div>
       )}
+      <br />
+      <Headline>Downloadbereich</Headline>
+      <Text>
+        Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
+        Heizsystemvergleich.
+      </Text>
+      <br />
+      <br />
     </Container>
   );
 };

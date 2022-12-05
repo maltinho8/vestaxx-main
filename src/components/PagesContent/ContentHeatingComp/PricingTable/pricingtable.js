@@ -26,8 +26,7 @@ export const ChoiceDiv = styled.div`
   font-size: 16px;
   width: 100%;
   max-width: 1000px;
-  margin: 30px 10px;
-  position: center;
+  margin: 0 auto;
   border-radius: 10px;
 
   @media only screen and (min-width: 768px) {
@@ -36,18 +35,18 @@ export const ChoiceDiv = styled.div`
     transform: translateY(0);
     padding: 20px 10px 20px;
     padding: 10px 10px 10px;
-    margin-top: 0;
   }
 `;
 
 export const Snip1214Tabelle = styled.div`
   color: #000000;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
   max-width: 1000px;
   position: center;
   border-radius: 10px;
+  margin: 0 auto;
 
   @media only screen and (min-width: 768px) {
     width: 100%;
@@ -115,11 +114,11 @@ export const PlanTabelle = styled.div`
 `;
 
 export const PlanTitle = styled.div`
-  height: 50px;
-  padding: 0px 10px 20px;
-  border: 1px solid darkorange;
+  height: 40px;
+  padding: 0px 20px 20px;
+  font-size: 0.8rem;
   border-radius: 10px;
-
+  color: darkorange;
   &.featured {
     padding: 10px 10px 20px;
     background-color: var(--lightyellow);
@@ -128,10 +127,9 @@ export const PlanTitle = styled.div`
 
 export const PlanTitleTabelle = styled.div`
   height: 50px;
-  padding: 0px 10px 20px;
+
   border-radius: 10px;
   border: 1px solid darkorange;
-
   &.featured {
     background-color: var(--lightyellow);
   }
@@ -166,7 +164,7 @@ export const PlanFeaturesTabelle = styled.ul`
 
 export const ListItem = styled.li`
   border-top: 1px solid darkorange;
-  padding: 10px 5%;
+  padding: 30px 5%;
 
   &.noborder {
     border-top: transparent;
@@ -192,7 +190,7 @@ export const ListImg = styled.img`
 export const ListImgTabelle = styled.img`
   height: 85px;
   width: 125px;
-  border-radius: 10px !important;
+  border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
 `;
@@ -203,6 +201,7 @@ export const ListPrice = styled.div`
 
 export const ListPriceTabelle = styled.div`
   font-size: 1.5em;
+  color: darkorange;
 `;
 
 export const ListText = styled.div`

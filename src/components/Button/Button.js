@@ -14,5 +14,10 @@ export const Button = styled.button`
     border: 1px solid darkorange;
     opacity: 1;
     background-color: #f2ecd4;
+    color: darkorange;
+  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.24;
   }
 `;
