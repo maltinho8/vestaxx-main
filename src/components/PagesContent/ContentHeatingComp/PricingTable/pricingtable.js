@@ -28,14 +28,6 @@ export const ChoiceDiv = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   border-radius: 10px;
-
-  @media only screen and (min-width: 768px) {
-    width: 100%;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    padding: 20px 10px 20px;
-    padding: 10px 10px 10px;
-  }
 `;
 
 export const Snip1214Tabelle = styled.div`
@@ -118,7 +110,7 @@ export const PlanTitle = styled.div`
   padding: 0px 20px 20px;
   font-size: 0.8rem;
   border-radius: 10px;
-  color: darkorange;
+  color: black;
   &.featured {
     padding: 10px 10px 20px;
     background-color: var(--lightyellow);
@@ -128,10 +120,9 @@ export const PlanTitle = styled.div`
 export const PlanTitleTabelle = styled.div`
   height: 50px;
 
-  border-radius: 10px;
-  border: 1px solid darkorange;
   &.featured {
-    background-color: var(--lightyellow);
+    border: 1px solid darkorange;
+    border-radius: 10px;
   }
 `;
 
@@ -141,7 +132,7 @@ export const PlanFeatures = styled.ul`
   text-align: center;
   list-style: outside none none;
   font-size: 0.8em;
-  border: 1px solid darkorange;
+  border: 1px solid transparent;
   border-radius: 10px;
 
   &.featured {
@@ -155,16 +146,15 @@ export const PlanFeaturesTabelle = styled.ul`
   text-align: center;
   list-style: outside none none;
   font-size: 0.8em;
-  border: 1px solid darkorange;
   border-radius: 10px;
   &.featured {
-    background-color: var(--lightyellow);
+    border: 1px solid darkorange;
   }
 `;
 
 export const ListItem = styled.li`
   border-top: 1px solid darkorange;
-  padding: 30px 5%;
+  padding: 30px 10%;
 
   &.noborder {
     border-top: transparent;
@@ -173,8 +163,9 @@ export const ListItem = styled.li`
 
 export const ListItemTabelle = styled.li`
   border-top: 1px solid darkorange;
+  bottom: 50%;
   padding: 10px 5%;
-  border-radius: 10px;
+
   &.noborder {
     border-top: transparent;
   }
@@ -190,7 +181,7 @@ export const ListImg = styled.img`
 export const ListImgTabelle = styled.img`
   height: 85px;
   width: 125px;
-  border-radius: 10px;
+  border-radius: 40%;
   padding-top: 10px;
   padding-bottom: 10px;
 `;

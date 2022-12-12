@@ -46,13 +46,13 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontSize: '1rem',
-    color: 'darkorange',
+    color: 'black',
     textTransform: 'uppercase',
     fontWeight: 'bold',
     textAlign: 'center',
   },
   subtitle: {
-    color: 'darkorange',
+    color: 'black',
     opacity: 0.87,
     marginTop: '1.1rem',
     fontWeight: 500,

@@ -1,4 +1,6 @@
 import { React, useState } from 'react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import {
@@ -52,6 +54,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+//import GenericPdfDownloader from '../../Download/index.js';
 
 ChartJS.register(
   CategoryScale,
@@ -99,30 +102,38 @@ const FlexCenter = styled.div`
   position: relative;
 `;
 
-const TopWrapper = styled.div`
-  border-radius: 5px;
-  margin-top: 70px;
-  margin-bottom: 70px;
+const DivContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  margin-top: 60px;
+  margin-bottom: 100px;
 `;
 
 const ResultDiv = styled.div`
-  width: 350px;
-  height: 270px;
-  border: 3px solid darkorange;
-  border-radius: 5px;
-  background-color: darkorange;
-  display: inline-block;
-  color: white;
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  border: 2px solid darkorange;
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  float: left;
+  margin-right: 60px;
 `;
 
 const PictureDiv = styled.div`
-  width: 350px;
-  height: 270px;
-  border: 3px solid darkorange;
-  border-radius: 5px;
-  background-image: url(${gas});
-  display: inline-block;
-  vertical-align: top;
+  height: 300px;
+  width: 300px;
+  border: 2px solid darkorange;
+  border-radius: 50%;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  background-image: url(${vestaxx});
+  background-size: cover;
+  background-position: center;
+
+    Copy to Clipboard
 `;
 
 const ChartDiv = styled.div`
@@ -136,26 +147,6 @@ const ButtonDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 30px;
-`;
-
-const GreyBoxTable = styled.table`
-  font-size: 1em;
-  font-weight: bold;
-  border-collapse: collapse;
-`;
-
-const TR = styled.tr`
-  border-bottom: 20px solid transparent;
-`;
-
-const TdRight = styled.td`
-  text-align: left;
-  padding-left: 10px;
-`;
-
-const TdLeft = styled.td`
-  text-align: left;
-  font-size: 0.8rem;
 `;
 
 const BoldTitle = styled(Text)`
@@ -172,6 +163,19 @@ const ContentHeatingComp = props => {
   const location = useLocation();
   let inputData = location.state.state;
   //let outputGeneralData = location.state.input;
+
+  const createPDF = async () => {
+    const pdf = new jsPDF('portrait', 'pt', [595.28, 1138.34914212548]);
+    const data = await html2canvas(document.querySelector('#pdf'));
+    const img = data.toDataURL('image/png');
+    const imgProperties = pdf.getImageProperties(img);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    console.log(pdfWidth);
+    console.log(pdfHeight);
+    pdf.addImage(img, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('vestaxx.pdf');
+  };
 
   // show/hide table columns
   const [showWoodPellet, setShowWoodPellet] = useState(true);
@@ -353,514 +357,478 @@ const ContentHeatingComp = props => {
     ],
   };
 
-  function capitalize(s) {
-    if (s) {
-      let indexHyphen = s.indexOf('-') + 1;
-      if (indexHyphen) {
-        s =
-          s.charAt(0).toUpperCase() +
-          s.slice(1, indexHyphen) +
-          s.charAt(indexHyphen).toUpperCase() +
-          s.slice(indexHyphen + 1);
-      } else {
-        s = s.charAt(0).toUpperCase() + s.slice(1);
-      }
-    }
-    return s;
-  }
-
   return (
-    <Container>
-      <Link to={'/Modellierung'}>
-        <Button>Zurück zur Auswahl</Button>
-      </Link>
-      <Link to={'/Modellierung'}>
-        <Button>Downloadbereich</Button>
-      </Link>
-      <Headline>Vergleichsrechnung</Headline>
-      <Text>
-        Hier erfahren Sie, welches Heizsystem für dieses Haus optimal ist!
-      </Text>
-      <TopWrapper>
-        <ResultDiv>
-          <GreyBoxTable>
-            <tbody>
-              <TR>
-                <TdLeft>
-                  Heizfläche in m<sup>2</sup>
-                </TdLeft>
-                <TdRight>{inputData.gebaeudeNutzflaeche}</TdRight>
-              </TR>
-              <TR>
-                <TdLeft>Anzahl Bewohner</TdLeft>
-                <TdRight>{inputData.bewohnerAnzahl}</TdRight>
-              </TR>
-              <TR>
-                <TdLeft>Standort</TdLeft>
-                <TdRight>{capitalize(inputData?.bundesland)}</TdRight>
-              </TR>
-              <TR>
-                <TdLeft>Beheizte Räume</TdLeft>
-                <TdRight>{inputData.anzahlBeheizterRaeume}</TdRight>
-              </TR>
-            </tbody>
-          </GreyBoxTable>
-        </ResultDiv>
-        <PictureDiv />
-      </TopWrapper>
+    <>
+      <Container id="pdf">
+        <br />
 
-      <ChoiceDiv>
-        <Text className="centered">
+        <Link to={'/Modellierung'}>
+          <Button>Zurück zur Auswahl</Button>
+        </Link>
+        <Headline>Vergleichsrechnung</Headline>
+        <Text>
+          Hier erfahren Sie, welches Heizsystem für dieses Haus optimal ist!
+        </Text>
+        <DivContainer>
+          <ResultDiv />
+          <PictureDiv />
+        </DivContainer>
+        <Text>
           Welche Heizsysteme möchten Sie mit den Vestaxx Heizfenstern
           vergleichen?
         </Text>
-        <Plan className="checkbox">
-          <PlanTitle>Holzpellet-System</PlanTitle>
-          <PlanFeatures>
-            <FontAwesomeIcon
-              icon={solid('tree')}
-              size="5x"
-              color="darkorange"
-            />
-            <ListItem className="noborder">
-              <input
-                type="checkbox"
-                checked={showWoodPellet}
-                onChange={() => setShowWoodPellet(prev => !prev)}
-              ></input>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
-        <Plan className="checkbox">
-          <PlanTitle>Wärmepumpen-System</PlanTitle>
-          <PlanFeatures>
-            <FontAwesomeIcon
-              icon={solid('fire')}
-              size="5x"
-              color="darkorange"
-            />
-            <ListItem className="noborder">
-              <input
-                type="checkbox"
-                checked={showHeatPump}
-                onChange={() => setShowHeatPump(prev => !prev)}
-              ></input>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
-        <Plan className="checkbox">
-          <PlanTitle>Sole-Wasser-Wärmepumpen-System</PlanTitle>
-          <PlanFeatures>
-            <FontAwesomeIcon
-              icon={solid('water')}
-              size="5x"
-              color="darkorange"
-            />
-            <ListItem className="noborder">
-              <input
-                type="checkbox"
-                checked={showBrineWater}
-                onChange={() => setShowBrineWater(prev => !prev)}
-              ></input>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
-        <Plan className="checkbox">
-          <PlanTitle>Vestaxx Heizfenster</PlanTitle>
-          <PlanFeatures>
-            <FontAwesomeIcon
-              icon={solid('water')}
-              size="5x"
-              color="darkorange"
-            />
-            <ListItem className="noborder">
-              <input type="checkbox" checked={true} disabled={true}></input>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
-        <Plan className="checkbox">
-          <PlanTitle>Erdgas-Brennwert-System</PlanTitle>
-          <PlanFeatures>
-            <FontAwesomeIcon
-              icon={solid('water')}
-              size="5x"
-              color="darkorange"
-            />
-            <ListItem className="noborder">
-              <input
-                type="checkbox"
-                checked={showGas}
-                onChange={() => setShowGas(prev => !prev)}
-              ></input>
-            </ListItem>
-          </PlanFeatures>
-        </Plan>
-      </ChoiceDiv>
-      <br />
-
-      <Snip1214Tabelle>
-        <Text className="centered">
-          Zu errichtendes Gebäude mit verschiedenen Heizsystemen
+        <br />
+        <br />
+        <ChoiceDiv>
+          <Plan>
+            <PlanTitle>Holzpellet-System</PlanTitle>
+            <PlanFeatures>
+              <ListItem>
+                <input
+                  type="checkbox"
+                  checked={showWoodPellet}
+                  onChange={() => setShowWoodPellet(prev => !prev)}
+                ></input>
+              </ListItem>
+            </PlanFeatures>
+          </Plan>
+          <Plan>
+            <PlanTitle>Wärmepumpen-System</PlanTitle>
+            <PlanFeatures>
+              <ListItem>
+                <input
+                  type="checkbox"
+                  checked={showHeatPump}
+                  onChange={() => setShowHeatPump(prev => !prev)}
+                ></input>
+              </ListItem>
+            </PlanFeatures>
+          </Plan>
+          <Plan>
+            <PlanTitle>Sole-Wasser-Wärmepumpen-System</PlanTitle>
+            <PlanFeatures>
+              <ListItem>
+                <input
+                  type="checkbox"
+                  checked={showBrineWater}
+                  onChange={() => setShowBrineWater(prev => !prev)}
+                ></input>
+              </ListItem>
+            </PlanFeatures>
+          </Plan>
+          <Plan>
+            <PlanTitle>Vestaxx Heizfenster</PlanTitle>
+            <PlanFeatures>
+              <ListItem>
+                <input type="checkbox" checked={true} disabled={true}></input>
+              </ListItem>
+            </PlanFeatures>
+          </Plan>
+          <Plan>
+            <PlanTitle>Erdgas-Brennwert-System</PlanTitle>
+            <PlanFeatures>
+              <ListItem>
+                <input
+                  type="checkbox"
+                  checked={showGas}
+                  onChange={() => setShowGas(prev => !prev)}
+                ></input>
+              </ListItem>
+            </PlanFeatures>
+          </Plan>
+        </ChoiceDiv>
+        <br />
+        <div id="divToDownload">
+          <Text>Zu errichtendes Gebäude mit verschiedenen Heizsystemen</Text>
+          <br />
+          <Snip1214Tabelle>
+            {showWoodPellet && (
+              <PlanTabelle>
+                <PlanTitleTabelle>Holzpellet-System</PlanTitleTabelle>
+                <PlanFeaturesTabelle>
+                  <ListImgTabelle src={woodpellets}></ListImgTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.investitionHolzpelletSystem?.toFixed(2)} €
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Investitionskosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtEnergiekostenHolzpelletSystem?.toFixed(2)}{' '}
+                      €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtAnnuitaetHolzpelletSystem?.toFixed(2)} €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+                  </ListItemTabelle>
+                </PlanFeaturesTabelle>
+              </PlanTabelle>
+            )}
+            {showHeatPump && (
+              <PlanTabelle>
+                <PlanTitleTabelle>Wärmepumpen-System</PlanTitleTabelle>
+                <PlanFeaturesTabelle>
+                  <ListImgTabelle src={heatpump}></ListImgTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.investitionWaermepumpenSystem?.toFixed(2)} €
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Investitionskosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtEnergiekostenWaermepumpenSystem?.toFixed(2)}{' '}
+                      €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtAnnuitaetWaermepumpenSystem?.toFixed(2)} €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+                  </ListItemTabelle>
+                </PlanFeaturesTabelle>
+              </PlanTabelle>
+            )}
+            {showBrineWater && (
+              <PlanTabelle>
+                <PlanTitleTabelle>
+                  Sole-Wasser-Wärmepumpen-System
+                </PlanTitleTabelle>
+                <PlanFeaturesTabelle>
+                  <ListImgTabelle src={brinewater}></ListImgTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.investitionSwWaermepumpenSystem?.toFixed(2)} €
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Investitionskosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtEnergiekostenSwWaermepumpenSystem?.toFixed(
+                        2
+                      )}{' '}
+                      €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtAnnuitaetSwWaermepumpenSystem?.toFixed(2)}{' '}
+                      €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+                  </ListItemTabelle>
+                </PlanFeaturesTabelle>
+              </PlanTabelle>
+            )}
+            <PlanTabelle>
+              <PlanTitleTabelle>Vestaxx Heizfenster</PlanTitleTabelle>
+              <PlanFeaturesTabelle className="featured">
+                <ListImgTabelle src={vestaxx}></ListImgTabelle>
+                <ListItemTabelle>
+                  <ListPriceTabelle>
+                    {output.investitionHeizfensterSystem?.toFixed(2)} €
+                  </ListPriceTabelle>
+                  <ListTextTabelle>Investitionskosten</ListTextTabelle>
+                </ListItemTabelle>
+                <ListItemTabelle>
+                  <ListPriceTabelle>
+                    {output.gesamtStromkostenHeizfenster?.toFixed(2)} €/a
+                  </ListPriceTabelle>
+                  <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+                </ListItemTabelle>
+                <ListItemTabelle>
+                  <ListPriceTabelle>
+                    {output.gesamtAnnuitaetHeizfensterMitAnrechnung?.toFixed(2)}{' '}
+                    €/a
+                  </ListPriceTabelle>
+                  <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+                </ListItemTabelle>
+              </PlanFeaturesTabelle>
+            </PlanTabelle>
+            {showGas && (
+              <PlanTabelle>
+                <PlanTitleTabelle>Erdgas-Brennwert-System</PlanTitleTabelle>
+                <PlanFeaturesTabelle>
+                  <ListImgTabelle src={gas}></ListImgTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.investitionErgasBwSystem?.toFixed(2)} €
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Investitionskosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtEnergiekostenErgasBwSystem?.toFixed(2)} €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
+                  </ListItemTabelle>
+                  <ListItemTabelle>
+                    <ListPriceTabelle>
+                      {output.gesamtAnnuitaetErgasBwSystem?.toFixed(2)} €/a
+                    </ListPriceTabelle>
+                    <ListTextTabelle>Gesamtannuität</ListTextTabelle>
+                  </ListItemTabelle>
+                </PlanFeaturesTabelle>
+              </PlanTabelle>
+            )}
+          </Snip1214Tabelle>
+          <br />
+          <br />
+          <br />
+          <FlexCenter>
+            <BoldTitle>
+              Investitionskosten der verschiedenen Heizsysteme
+            </BoldTitle>
+            <span className="tooltip" style={{ color: 'darkorange' }}>
+              <FontAwesomeIcon icon={solid('circle-question')} />
+              <span className="tooltiptext">
+                Die Investitionskosten eines Heizsystems sind die Kosten, die
+                beim Kauf des jeweiligen Heizsystems inklusive aller für den
+                Betrieb notwendigen Bestandteile sowie der Montage anfallen.
+              </span>
+            </span>
+          </FlexCenter>
+          <ChartDiv>
+            <Bar options={optionsInvestmentCost} data={dataInvestmentCost} />
+          </ChartDiv>
+        </div>
+        <br />
+        <br />
+        <br />
+        <FlexCenter>
+          <BoldTitle>Details zu den Heizsystemen</BoldTitle>
+        </FlexCenter>
+        <MuiAccordion
+          title1="Holzpellet-System"
+          details1="Beim Holzpellet-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch das Verbrennen von Holzpellets in einem Pelletkessel. Mit der bei der Verbrennung freiwerdenden Wärmeenergie wird Wasser erwärmt. Durch eine Fußbodenheizung wird die Wärme dann an den Raum abgegeben."
+          title2="Wärmepumpen-System"
+          details2="Beim Wärmepumpen-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch eine z.B. Luft-Wasser-Wärmepumpe. Die Luft-Wasser-Wärmepumpe funktioniert prinzipiell wie ein Kühlschrank, nur umgekehrt. Sie nutzt mit Hilfe von Strom die Umgebungswärme aus der Luft und erwärmt mit einer Jahreszahl von durchschnittlich 2,5 Wasser, welches anschließend durch Heizschlangen im Fußboden geleitet wird und dadurch den Raum erwärmt."
+          title3="Sole-Wasser-Wärmepumpen-System"
+          details3="Beim Sole-Wasser-Wärmepumpen-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser mit Hilfe einer Sole-Wasser-Wärmepumpe. Das Prinzip entspricht dem der Luft-Wasser-Wärmepumpe, mit dem Unterschied, dass nicht die Umgebungswärme aus der Luft, sondern die Umgebungswärme aus dem Erdreich zum Heizen genutzt wird. Die Sole-Wasser-Wärmepumpe hat eine durchschnittliche Jahresarbeitszahl von 3,5."
+          title4="Vestaxx Heizfenster-System"
+          details4="Bei dem Vestaxx Heizfenstersystem handelt es sich um ein auf Nanotechnik basierendes Infrarotheizsystem (Stromdirektheizung) in Verbindung mit einer Trinkwarmwasserbereitung.  Zentrales Element des Vestaxx Heizsystems sind die Vestaxx Heizisoliergläser. Dabei handelt es sich um 3-fach Isoliergläser mit einem exzellenten u-Wert von 0,5 (Wärmedurchgangskoeffizient) für Fenster und Fenstertüren (Balkontüren). Durch die Nanobeschichtung wird elektrischer Strom geleitet und dieser wird in Wärme mit einem Wirkungsgrad von 95% an das Rauminnere abgegeben. Die Bereitstellung von Trinkwarmwasser erfolgt entweder über eine Trinkwasserwärmepumpe mit einer hohen Jahresarbeitszahl, kann aber auch über einen elektrischen Durchlauferhitzer erfolgen. Das Vestaxx Heizfenstersystem wird durch eine große Photovoltaik-Anlage auf dem Dach des Hauses - vorzugsweise inklusive Stromspeicher – maßgeblich versorgt."
+          title5="Erdgas-Brennwert-System"
+          details5="Beim Erdgas-Brennwertkessel-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch das Verbrennen von fossilem Erdgas in einem Brennwertkessel. Durch die Verbrennung von Erdgas wird dabei Wasser erhitzt, dass anschließend durch die Heizkörper in den Räumen fließt und das Haus erwärmt."
+        ></MuiAccordion>
+        <br />
+        <Headline>Diagrammauswahl</Headline>
+        <Text>
+          Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
+          Heizsystemvergleich.
         </Text>
-        {showWoodPellet && (
-          <PlanTabelle>
-            <PlanTitleTabelle>Holzpellet-System</PlanTitleTabelle>
-            <PlanFeaturesTabelle>
-              <ListImgTabelle src={woodpellets}></ListImgTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.investitionHolzpelletSystem?.toFixed(2)} €
-                </ListPriceTabelle>
-                <ListTextTabelle>Investitionskosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtEnergiekostenHolzpelletSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtAnnuitaetHolzpelletSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
-              </ListItemTabelle>
-            </PlanFeaturesTabelle>
-          </PlanTabelle>
-        )}
-        {showHeatPump && (
-          <PlanTabelle>
-            <PlanTitleTabelle>Wärmepumpen-System</PlanTitleTabelle>
-            <PlanFeaturesTabelle>
-              <ListImgTabelle src={heatpump}></ListImgTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.investitionWaermepumpenSystem?.toFixed(2)} €
-                </ListPriceTabelle>
-                <ListTextTabelle>Investitionskosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtEnergiekostenWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtAnnuitaetWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
-              </ListItemTabelle>
-            </PlanFeaturesTabelle>
-          </PlanTabelle>
-        )}
-        {showBrineWater && (
-          <PlanTabelle>
-            <PlanTitleTabelle>Sole-Wasser-Wärmepumpen-System</PlanTitleTabelle>
-            <PlanFeaturesTabelle>
-              <ListImgTabelle src={brinewater}></ListImgTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.investitionSwWaermepumpenSystem?.toFixed(2)} €
-                </ListPriceTabelle>
-                <ListTextTabelle>Investitionskosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtEnergiekostenSwWaermepumpenSystem?.toFixed(2)}{' '}
-                  €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtAnnuitaetSwWaermepumpenSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
-              </ListItemTabelle>
-            </PlanFeaturesTabelle>
-          </PlanTabelle>
-        )}
-        <PlanTabelle className="featured">
-          <PlanTitleTabelle className="featured">
-            Vestaxx Heizfenster
-          </PlanTitleTabelle>
-          <PlanFeaturesTabelle className="featured">
-            <ListImgTabelle src={vestaxx}></ListImgTabelle>
-            <ListItemTabelle>
-              <ListPriceTabelle>
-                {output.investitionHeizfensterSystem?.toFixed(2)} €
-              </ListPriceTabelle>
-              <ListTextTabelle>Investitionskosten</ListTextTabelle>
-            </ListItemTabelle>
-            <ListItemTabelle>
-              <ListPriceTabelle>
-                {output.gesamtStromkostenHeizfenster?.toFixed(2)} €/a
-              </ListPriceTabelle>
-              <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
-            </ListItemTabelle>
-            <ListItemTabelle>
-              <ListPriceTabelle>
-                {output.gesamtAnnuitaetHeizfensterMitAnrechnung?.toFixed(2)} €/a
-              </ListPriceTabelle>
-              <ListTextTabelle>Gesamtannuität</ListTextTabelle>
-            </ListItemTabelle>
-          </PlanFeaturesTabelle>
-        </PlanTabelle>
-        {showGas && (
-          <PlanTabelle>
-            <PlanTitleTabelle>Erdgas-Brennwert-System</PlanTitleTabelle>
-            <PlanFeaturesTabelle>
-              <ListImgTabelle src={gas}></ListImgTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.investitionErgasBwSystem?.toFixed(2)} €
-                </ListPriceTabelle>
-                <ListTextTabelle>Investitionskosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtEnergiekostenErgasBwSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamt-Energiekosten</ListTextTabelle>
-              </ListItemTabelle>
-              <ListItemTabelle>
-                <ListPriceTabelle>
-                  {output.gesamtAnnuitaetErgasBwSystem?.toFixed(2)} €/a
-                </ListPriceTabelle>
-                <ListTextTabelle>Gesamtannuität</ListTextTabelle>
-              </ListItemTabelle>
-            </PlanFeaturesTabelle>
-          </PlanTabelle>
-        )}
-      </Snip1214Tabelle>
-      <br />
-      <br />
-      <br />
-      <FlexCenter>
-        <BoldTitle>Investitionskosten der verschiedenen Heizsysteme</BoldTitle>
-        <span className="tooltip" style={{ color: 'darkorange' }}>
-          <FontAwesomeIcon icon={solid('circle-question')} />
-          <span className="tooltiptext">
-            Die Investitionskosten eines Heizsystems sind die Kosten, die beim
-            Kauf des jeweiligen Heizsystems inklusive aller für den Betrieb
-            notwendigen Bestandteile sowie der Montage anfallen.
+        <br />
+        <br />
+        <FlexCenter>
+          <BoldTitle>
+            GEG-Referenzgebäude im Vergleich mit den Heizsystemen
+          </BoldTitle>
+          <span className="tooltip" style={{ color: 'darkorange' }}>
+            <FontAwesomeIcon icon={solid('circle-question')} />
+            <span className="tooltiptext">
+              Das GEG-Referenzgebäude ist ein virtuelles Hilfsgebäude, mit
+              dessen Hilfe der maximal zulässige Primärenergiebedarf für
+              Heizung, Warmwasserbereitung, Lüftung und Kühlung eines realen
+              Gebäudes ermittelt wird. Das GEG-Referenzgebäude verfügt über
+              einen Erdgas-Brennwertkessel zum Heizen und eine
+              Solarthermie-Anlage für die Warmwasserbereitung.
+            </span>
           </span>
-        </span>
-      </FlexCenter>
-      <ChartDiv>
-        <Bar options={optionsInvestmentCost} data={dataInvestmentCost} />
-      </ChartDiv>
-      <br />
-      <br />
-      <br />
-      <FlexCenter>
-        <BoldTitle>Details zu den Heizsystemen</BoldTitle>
-      </FlexCenter>
-      <MuiAccordion
-        title1="Holzpellet-System"
-        details1="Beim Holzpellet-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch das Verbrennen von Holzpellets in einem Pelletkessel. Mit der bei der Verbrennung freiwerdenden Wärmeenergie wird Wasser erwärmt. Durch eine Fußbodenheizung wird die Wärme dann an den Raum abgegeben."
-        title2="Wärmepumpen-System"
-        details2="Beim Wärmepumpen-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch eine z.B. Luft-Wasser-Wärmepumpe. Die Luft-Wasser-Wärmepumpe funktioniert prinzipiell wie ein Kühlschrank, nur umgekehrt. Sie nutzt mit Hilfe von Strom die Umgebungswärme aus der Luft und erwärmt mit einer Jahreszahl von durchschnittlich 2,5 Wasser, welches anschließend durch Heizschlangen im Fußboden geleitet wird und dadurch den Raum erwärmt."
-        title3="Sole-Wasser-Wärmepumpen-System"
-        details3="Beim Sole-Wasser-Wärmepumpen-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser mit Hilfe einer Sole-Wasser-Wärmepumpe. Das Prinzip entspricht dem der Luft-Wasser-Wärmepumpe, mit dem Unterschied, dass nicht die Umgebungswärme aus der Luft, sondern die Umgebungswärme aus dem Erdreich zum Heizen genutzt wird. Die Sole-Wasser-Wärmepumpe hat eine durchschnittliche Jahresarbeitszahl von 3,5."
-        title4="Vestaxx Heizfenster-System"
-        details4="Bei dem Vestaxx Heizfenstersystem handelt es sich um ein auf Nanotechnik basierendes Infrarotheizsystem (Stromdirektheizung) in Verbindung mit einer Trinkwarmwasserbereitung.  Zentrales Element des Vestaxx Heizsystems sind die Vestaxx Heizisoliergläser. Dabei handelt es sich um 3-fach Isoliergläser mit einem exzellenten u-Wert von 0,5 (Wärmedurchgangskoeffizient) für Fenster und Fenstertüren (Balkontüren). Durch die Nanobeschichtung wird elektrischer Strom geleitet und dieser wird in Wärme mit einem Wirkungsgrad von 95% an das Rauminnere abgegeben. Die Bereitstellung von Trinkwarmwasser erfolgt entweder über eine Trinkwasserwärmepumpe mit einer hohen Jahresarbeitszahl, kann aber auch über einen elektrischen Durchlauferhitzer erfolgen. Das Vestaxx Heizfenstersystem wird durch eine große Photovoltaik-Anlage auf dem Dach des Hauses - vorzugsweise inklusive Stromspeicher – maßgeblich versorgt."
-        title5="Erdgas-Brennwert-System"
-        details5="Beim Erdgas-Brennwertkessel-System erfolgt das Heizen sowie die Bereitstellung von Trinkwarmwasser durch das Verbrennen von fossilem Erdgas in einem Brennwertkessel. Durch die Verbrennung von Erdgas wird dabei Wasser erhitzt, dass anschließend durch die Heizkörper in den Räumen fließt und das Haus erwärmt."
-      ></MuiAccordion>
-      <br />
-      <Headline>Diagrammauswahl</Headline>
-      <Text>
-        Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
-        Heizsystemvergleich.
-      </Text>
-      <br />
-      <br />
-      <FlexCenter>
-        <BoldTitle>
-          GEG-Referenzgebäude im Vergleich mit den Heizsystemen
-        </BoldTitle>
-        <span className="tooltip" style={{ color: 'darkorange' }}>
-          <FontAwesomeIcon icon={solid('circle-question')} />
-          <span className="tooltiptext">
-            Das GEG-Referenzgebäude ist ein virtuelles Hilfsgebäude, mit dessen
-            Hilfe der maximal zulässige Primärenergiebedarf für Heizung,
-            Warmwasserbereitung, Lüftung und Kühlung eines realen Gebäudes
-            ermittelt wird. Das GEG-Referenzgebäude verfügt über einen
-            Erdgas-Brennwertkessel zum Heizen und eine Solarthermie-Anlage für
-            die Warmwasserbereitung.
+        </FlexCenter>
+        <ButtonDiv>
+          <Button onClick={() => setShowGEG(prev => !prev)}>Diagramm</Button>
+        </ButtonDiv>
+        {showGEG && (
+          <div>
+            <br />
+            <FlexCenter>
+              <ChartLabel>
+                Ökologischer Vergleich: Primärenergiebedarf
+              </ChartLabel>
+              <span className="tooltip" style={{ color: 'darkorange' }}>
+                <FontAwesomeIcon icon={solid('circle-question')} />
+                <span className="tooltiptext">
+                  Der Primärenergiebedarf ergibt sich aus der Multiplikation des
+                  Endenergiebedarfs mit dem Primärenergiefaktor des eingesetzten
+                  Energieträgers. Der Primärenergiefaktor berücksichtigt dabei
+                  die Energie, die zur Gewinnung, Umwandlung und zum Transport
+                  des Energieträgers bis in das Gebäude benötigt wird. Bei dem
+                  Energieträger handelt es sich um Strom, Erdgas oder
+                  Holzpellets.
+                </span>
+              </span>
+            </FlexCenter>
+            <ChartDiv>
+              <Bar options={optionsPrimaryEnergy} data={dataEcoPrimaryEnergy} />
+            </ChartDiv>
+            <br />
+            <br />
+
+            <FlexCenter>
+              <ChartLabel>Ökologischer Vergleich: CO2-Emissionen</ChartLabel>
+              <span className="tooltip" style={{ color: 'darkorange' }}>
+                <FontAwesomeIcon icon={solid('circle-question')} />
+                <span className="tooltiptext">
+                  CO2-Äquivalente sind eine Maßeinheit zur Vereinheitlichung der
+                  Klimawirkung von verschiedenen Treibhausgasen. Neben dem
+                  wichtigsten Treibhausgas Kohlenstoffdioxid gibt es auch
+                  weitere Treibhausgase wie Methan oder Lachgas, die nicht im
+                  gleichen Maße zum Treibhauseffekt beitragen wie
+                  Kohlenstoffdioxid. Um die Auswirkungen der verschiedenen Gase
+                  auf den Treibhauseffekt vergleichen zu können, gibt es die
+                  CO2-Äquivalente. Bei den CO2-Äquivalent-Emissionen werden
+                  somit nicht nur die Kohlenstoffdioxidemissionen, sondern alle
+                  durch das Heizsystem verursachten Emissionen berücksichtigt.
+                </span>
+              </span>
+            </FlexCenter>
+            <ChartDiv>
+              <Bar options={optionsCO2} data={dataEcoCO2} />
+            </ChartDiv>
+            <br />
+            <br />
+          </div>
+        )}
+
+        {!showGEG && <br />}
+
+        <FlexCenter>
+          <BoldTitle>Annuität der verschiedenen Heizsysteme</BoldTitle>
+          <span className="tooltip" style={{ color: 'darkorange' }}>
+            <FontAwesomeIcon icon={solid('circle-question')} />
+            <span className="tooltiptext">
+              Bei der Gesamtannuität handelt es sich um die jährlich notwendige
+              Zahlung, um die Gesamtkosten des jeweiligen Heizsystems zu tilgen.
+              Die Gesamtkosten setzen sich dabei aus den Investitionskosten und
+              den Betriebskosten des Heizsystems zusammen. Die Laufzeit, bzw.
+              die technische Lebensdauer der Heizsysteme beträgt dabei in der
+              Regel 20 Jahre. Die Annuität bleibt über diesen gesamten Zeitraum
+              konstant.
+            </span>
           </span>
-        </span>
-      </FlexCenter>
-      <ButtonDiv>
-        <Button onClick={() => setShowGEG(prev => !prev)}>Diagramm</Button>
-      </ButtonDiv>
-      {showGEG && (
-        <div>
-          <br />
-          <FlexCenter>
-            <ChartLabel>Ökologischer Vergleich: Primärenergiebedarf</ChartLabel>
-            <span className="tooltip" style={{ color: 'darkorange' }}>
-              <FontAwesomeIcon icon={solid('circle-question')} />
-              <span className="tooltiptext">
-                Der Primärenergiebedarf ergibt sich aus der Multiplikation des
-                Endenergiebedarfs mit dem Primärenergiefaktor des eingesetzten
-                Energieträgers. Der Primärenergiefaktor berücksichtigt dabei die
-                Energie, die zur Gewinnung, Umwandlung und zum Transport des
-                Energieträgers bis in das Gebäude benötigt wird. Bei dem
-                Energieträger handelt es sich um Strom, Erdgas oder Holzpellets.
+        </FlexCenter>
+        <ButtonDiv>
+          <Button onClick={() => setShowAnnuity(prev => !prev)}>
+            Diagramm
+          </Button>
+        </ButtonDiv>
+
+        {showAnnuity && (
+          <div>
+            <ChartDiv>
+              <Bar options={optionsAnnuity} data={dataAnnuity} />
+            </ChartDiv>
+            <br />
+          </div>
+        )}
+        <br />
+        <FlexCenter>
+          <BoldTitle className="multiline">
+            Jährliche Einsparungen durch Einsatz des Heizfenstersystems
+            <br />
+            im Vergleich zu den anderen Systemen
+          </BoldTitle>
+        </FlexCenter>
+        <ButtonDiv>
+          <Button onClick={() => setShowReduction(prev => !prev)}>
+            Diagramm
+          </Button>
+        </ButtonDiv>
+        {showReduction && (
+          <div>
+            <br />
+
+            <FlexCenter>
+              <ChartLabel>
+                Jährliche Einsparung bei der Primärenergie
+              </ChartLabel>
+              <span className="tooltip" style={{ color: 'darkorange' }}>
+                <FontAwesomeIcon icon={solid('circle-question')} />
+                <span className="tooltiptext">
+                  Hier wird Ihnen angezeigt, wie viel Primärenergie Ihr
+                  ausgewähltes Gebäude mit Heizfenstersystem im Vergleich zu den
+                  angezeigten Heizsystemen pro Quadratmeter und Jahr einspart.
+                </span>
               </span>
-            </span>
-          </FlexCenter>
-          <ChartDiv>
-            <Bar options={optionsPrimaryEnergy} data={dataEcoPrimaryEnergy} />
-          </ChartDiv>
-          <br />
-          <br />
+            </FlexCenter>
+            <ChartDiv>
+              <Bar
+                data={dataReductionPrimary}
+                options={optionsReductionPrimary}
+              />
+            </ChartDiv>
+            <br />
+            <br />
 
-          <FlexCenter>
-            <ChartLabel>Ökologischer Vergleich: CO2-Emissionen</ChartLabel>
-            <span className="tooltip" style={{ color: 'darkorange' }}>
-              <FontAwesomeIcon icon={solid('circle-question')} />
-              <span className="tooltiptext">
-                CO2-Äquivalente sind eine Maßeinheit zur Vereinheitlichung der
-                Klimawirkung von verschiedenen Treibhausgasen. Neben dem
-                wichtigsten Treibhausgas Kohlenstoffdioxid gibt es auch weitere
-                Treibhausgase wie Methan oder Lachgas, die nicht im gleichen
-                Maße zum Treibhauseffekt beitragen wie Kohlenstoffdioxid. Um die
-                Auswirkungen der verschiedenen Gase auf den Treibhauseffekt
-                vergleichen zu können, gibt es die CO2-Äquivalente. Bei den
-                CO2-Äquivalent-Emissionen werden somit nicht nur die
-                Kohlenstoffdioxidemissionen, sondern alle durch das Heizsystem
-                verursachten Emissionen berücksichtigt.
+            <FlexCenter>
+              <ChartLabel>
+                Jährliche Einsparung an CO2-Äquivalent-Emissionen
+              </ChartLabel>
+              <span className="tooltip" style={{ color: 'darkorange' }}>
+                <FontAwesomeIcon icon={solid('circle-question')} />
+                <span className="tooltiptext">
+                  Hier wird Ihnen angezeigt, wie viele CO2-Äquivalent-Emissionen
+                  Ihr ausgewähltes Gebäude mit Heizfenstersystem im Vergleich zu
+                  den angezeigten Heizsystemen pro Jahr einspart.
+                </span>
               </span>
-            </span>
-          </FlexCenter>
-          <ChartDiv>
-            <Bar options={optionsCO2} data={dataEcoCO2} />
-          </ChartDiv>
-          <br />
-          <br />
-        </div>
-      )}
+            </FlexCenter>
+            <ChartDiv>
+              <Bar options={optionsReductionCO2} data={dataReductionCO2} />
+            </ChartDiv>
+            <br />
+            <br />
 
-      {!showGEG && <br />}
-
-      <FlexCenter>
-        <BoldTitle>Annuität der verschiedenen Heizsysteme</BoldTitle>
-        <span className="tooltip" style={{ color: 'darkorange' }}>
-          <FontAwesomeIcon icon={solid('circle-question')} />
-          <span className="tooltiptext">
-            Bei der Gesamtannuität handelt es sich um die jährlich notwendige
-            Zahlung, um die Gesamtkosten des jeweiligen Heizsystems zu tilgen.
-            Die Gesamtkosten setzen sich dabei aus den Investitionskosten und
-            den Betriebskosten des Heizsystems zusammen. Die Laufzeit, bzw. die
-            technische Lebensdauer der Heizsysteme beträgt dabei in der Regel 20
-            Jahre. Die Annuität bleibt über diesen gesamten Zeitraum konstant.
-          </span>
-        </span>
-      </FlexCenter>
-      <ButtonDiv>
-        <Button onClick={() => setShowAnnuity(prev => !prev)}>Diagramm</Button>
-      </ButtonDiv>
-
-      {showAnnuity && (
-        <div>
-          <ChartDiv>
-            <Bar options={optionsAnnuity} data={dataAnnuity} />
-          </ChartDiv>
-          <br />
-        </div>
-      )}
-      <br />
-      <FlexCenter>
-        <BoldTitle className="multiline">
-          Jährliche Einsparungen durch Einsatz des Heizfenstersystems
-          <br />
-          im Vergleich zu den anderen Systemen
-        </BoldTitle>
-      </FlexCenter>
-      <ButtonDiv>
-        <Button onClick={() => setShowReduction(prev => !prev)}>
-          Diagramm
-        </Button>
-      </ButtonDiv>
-      {showReduction && (
-        <div>
-          <br />
-
-          <FlexCenter>
-            <ChartLabel>Jährliche Einsparung bei der Primärenergie</ChartLabel>
-            <span className="tooltip" style={{ color: 'darkorange' }}>
-              <FontAwesomeIcon icon={solid('circle-question')} />
-              <span className="tooltiptext">
-                Hier wird Ihnen angezeigt, wie viel Primärenergie Ihr
-                ausgewähltes Gebäude mit Heizfenstersystem im Vergleich zu den
-                angezeigten Heizsystemen pro Quadratmeter und Jahr einspart.
+            <FlexCenter>
+              <ChartLabel>Reduzierung der Annuität</ChartLabel>
+              <span className="tooltip" style={{ color: 'darkorange' }}>
+                <FontAwesomeIcon icon={solid('circle-question')} />
+                <span className="tooltiptext">
+                  Hier wird Ihnen angezeigt, um wie viel Euro die Gesamtannuität
+                  Ihres ausgewählten Gebäudes durch den Einsatz des
+                  Heizfenstersystems im Vergleich zu den angezeigten
+                  Heizsystemen reduziert werden kann.
+                </span>
               </span>
-            </span>
-          </FlexCenter>
-          <ChartDiv>
-            <Bar
-              data={dataReductionPrimary}
-              options={optionsReductionPrimary}
-            />
-          </ChartDiv>
-          <br />
-          <br />
+            </FlexCenter>
+            <ChartDiv>
+              <Bar
+                data={dataReductionAnnuity}
+                options={optionsReductionAnnuity}
+              />
+            </ChartDiv>
 
-          <FlexCenter>
-            <ChartLabel>
-              Jährliche Einsparung an CO2-Äquivalent-Emissionen
-            </ChartLabel>
-            <span className="tooltip" style={{ color: 'darkorange' }}>
-              <FontAwesomeIcon icon={solid('circle-question')} />
-              <span className="tooltiptext">
-                Hier wird Ihnen angezeigt, wie viele CO2-Äquivalent-Emissionen
-                Ihr ausgewähltes Gebäude mit Heizfenstersystem im Vergleich zu
-                den angezeigten Heizsystemen pro Jahr einspart.
-              </span>
-            </span>
-          </FlexCenter>
-          <ChartDiv>
-            <Bar options={optionsReductionCO2} data={dataReductionCO2} />
-          </ChartDiv>
-          <br />
-          <br />
+            <br />
+            <br />
+          </div>
+        )}
+        <br />
+        <Headline>Downloadbereich</Headline>
+        <Text>
+          Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
+          Heizsystemvergleich.
+        </Text>
+        <br />
 
-          <FlexCenter>
-            <ChartLabel>Reduzierung der Annuität</ChartLabel>
-            <span className="tooltip" style={{ color: 'darkorange' }}>
-              <FontAwesomeIcon icon={solid('circle-question')} />
-              <span className="tooltiptext">
-                Hier wird Ihnen angezeigt, um wie viel Euro die Gesamtannuität
-                Ihres ausgewählten Gebäudes durch den Einsatz des
-                Heizfenstersystems im Vergleich zu den angezeigten Heizsystemen
-                reduziert werden kann.
-              </span>
-            </span>
-          </FlexCenter>
-          <ChartDiv>
-            <Bar
-              data={dataReductionAnnuity}
-              options={optionsReductionAnnuity}
-            />
-          </ChartDiv>
+        {/*
 
-          <br />
-          <br />
-        </div>
-      )}
-      <br />
-      <Headline>Downloadbereich</Headline>
-      <Text>
-        Wählen Sie aus verschiedenen Diagrammen für einen maßgeschneiderten
-        Heizsystemvergleich.
-      </Text>
-      <br />
-      <br />
-    </Container>
+      <GenericPdfDownloader
+        downloadFileName="vestaxx"
+        rootElementId="divToDownload"
+      />
+      */}
+
+        <br />
+      </Container>
+      <Button onClick={createPDF}>Download</Button>
+    </>
   );
 };
 
