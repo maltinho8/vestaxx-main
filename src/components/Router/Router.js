@@ -9,6 +9,7 @@ import NavigationBar from '../Bar/NavigationBar/index.js';
 import HeatingComp from '../Pages/HeatingComp/HeatingComp.js';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import Modellierung from '../Pages/Modellierung/Modellierung.js';
+import DXF from '../Pages/DXF/DXF.js';
 import HeatingCompBerlin from '../Pages/HeatingComp/bundesland1/HeatingCompBerlin';
 import HeatingCompHessen from '../Pages/HeatingComp/bundesland1/HeatingCompHessen';
 import HeatingCompBayern from '../Pages/HeatingComp/bundesland1/HeatingCompBayern';
@@ -82,6 +83,7 @@ const Routing = () => {
         />
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/Modellierung" element={<Modellierung />} />
+        <Route path="/DXF" element={<DXF />} />
       </Routes>
       <Footer />
     </Router>

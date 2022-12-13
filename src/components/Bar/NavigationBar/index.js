@@ -26,6 +26,7 @@ const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   font-weight: bold;
+  margin-right: 20px;
   &.active {
     font-weight: bold;
   }
@@ -70,6 +71,7 @@ const NavBar = () => {
         <Burger />
         <NavMenu>
           <NavLink to="/Modellierung">Heizkostenvergleich</NavLink>
+          <NavLink to="/DXF">Technische Dateneinlesung</NavLink>
         </NavMenu>
         <NavBtn>
           <Button>
