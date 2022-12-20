@@ -1,0 +1,54 @@
+#customers {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	border: none;
+	
+}
+
+#customers td,
+#customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	border-radius: 10px;
+	background-color: darkorange;
+}
+
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+	background-color: #ddd;
+}
+
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #04AA6D;
+	color: white;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.custom-file-upload {
+	border-radius: 10px;
+		padding: 10px 22px;
+		color: white;
+		border: 1px solid white;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		text-decoration: none;
+		background-color: darkorange;
+}
+
+.custom-file-upload:hover {
+	transition: all 0.2s ease-in-out;
+		border: 1px solid darkorange;
+		opacity: 1;
+		background-color: #f2ecd4;
+		color: darkorange;
+}
