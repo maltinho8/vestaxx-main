@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Text = styled(Link)`
   color: darkorange;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-left: 10rem;
   font-weight: 500;
   cursor: pointer;
@@ -40,16 +40,23 @@ const Content = ({ closeMenu }) => {
       <Text
         onClick={closeMenu}
         to="/LandingPage"
-        style={{ textDecoration: 'none', color: 'orange' }}
+        style={{ textDecoration: 'none', color: 'orange', fontWeight: 'bold' }}
       >
         vestaxx
       </Text>
       <Text
         onClick={closeMenu}
         to="/Modellierung"
-        style={{ textDecoration: 'none', color: 'white' }}
+        style={{ textDecoration: 'none', color: 'darkorange' }}
       >
         Heizvergleich
+      </Text>
+      <Text
+        onClick={closeMenu}
+        to="/DXF"
+        style={{ textDecoration: 'none', color: 'darkorange' }}
+      >
+        DXF
       </Text>
       <br />
       <br />

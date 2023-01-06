@@ -28,6 +28,10 @@ const Headline = styled.h3`
   color: darkorange;
 `;
 
+const InputDivHeadline = styled.h4`
+  color: white;
+`;
+
 const Text = styled.div`
   font-size: 1rem;
   color: darkorange;
@@ -77,7 +81,7 @@ const InputDiv = styled.div`
   padding: 1em;
   border-radius: 5px;
   margin-bottom: 2rem;
-  width: 65% !important;
+  width: 85% !important;
   height: auto;
   margin: 0 auto;
 `;
@@ -113,9 +117,9 @@ const ContentModellierung = () => {
       const testo = parser.parseSync(dxfContents);
 
       const helper = new Helper(dxfContents);
-      console.log(testo);
+
       console.log(helper);
-      console.log(helper.parsed.blocks[0].name);
+      console.log(testo);
 
       const rows = [
         createData(
@@ -197,10 +201,10 @@ const ContentModellierung = () => {
       const inputdiv = (
         <div>
           <InputDiv>
-            <h5>
+            <InputDivHeadline>
               <FontAwesomeIcon icon={solid('house-chimney-window')} /> &nbsp;
               Gebäudedaten und Standort
-            </h5>
+            </InputDivHeadline>
 
             <InputFieldText>
               <span className="tooltip">
@@ -369,14 +373,19 @@ const ContentModellierung = () => {
           <FontAwesomeIcon icon={solid('file-upload')} /> &nbsp; Attach
         </label>
       </InputContainer>
-
+      <br />
+      <br />
       <FloatContainer>
         <FloatChild1>
           <div dangerouslySetInnerHTML={{ __html: dxfSVG }} />
         </FloatChild1>
         {show}
       </FloatContainer>
+      <br />
+      <br />
       {showInput}
+      <br />
+      <br />
     </Container>
   );
 };

@@ -56,6 +56,14 @@ import {
 } from 'chart.js';
 //import GenericPdfDownloader from '../../Download/index.js';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -112,7 +120,7 @@ const DivContainer = styled.div`
 const ResultDiv = styled.div`
   height: 300px;
   width: 300px;
-  background-color: white;
+  background-color: transparent;
   border: 2px solid darkorange;
   border-radius: 50%;
   text-align: center;
@@ -357,6 +365,15 @@ const ContentHeatingComp = props => {
     ],
   };
 
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+  }
+
+  const rows = [
+    createData('Komponente 1', 237, 9.0, 37, 4.3),
+    createData('Komponente 2', 237, 9.0, 37, 4.3),
+  ];
+
   return (
     <>
       <Container id="pdf">
@@ -370,7 +387,67 @@ const ContentHeatingComp = props => {
           Hier erfahren Sie, welches Heizsystem für dieses Haus optimal ist!
         </Text>
         <DivContainer>
-          <ResultDiv />
+          <ResultDiv>
+            <TableContainer component={Paper}>
+              <Table
+                sx={{ width: 500 }}
+                aria-label="simple table"
+                style={{ backgroundColor: '#f2ecd4' }}
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={{ color: 'darkorange' }}>
+                      <FontAwesomeIcon icon={solid('file-upload')} />
+                    </TableCell>
+                    <TableCell
+                      style={{ color: 'darkorange', fontWeight: 'bold' }}
+                      align="right"
+                    >
+                      Layer 1
+                    </TableCell>
+                    <TableCell
+                      style={{ color: 'darkorange', fontWeight: 'bold' }}
+                      align="right"
+                    >
+                      Layer 2
+                    </TableCell>
+                    <TableCell
+                      style={{ color: 'darkorange', fontWeight: 'bold' }}
+                      align="right"
+                    >
+                      Layer 3
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      style={{ color: 'darkorange' }}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{ color: 'darkorange', fontWeight: 'bold' }}
+                      >
+                        {row.name}
+                      </TableCell>
+                      <TableCell style={{ color: 'darkorange' }} align="right">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell style={{ color: 'darkorange' }} align="right">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell style={{ color: 'darkorange' }} align="right">
+                        {row.carbs}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </ResultDiv>
           <PictureDiv />
         </DivContainer>
         <Text>

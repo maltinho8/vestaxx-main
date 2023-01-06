@@ -71,7 +71,7 @@ const NavBar = () => {
         <Burger />
         <NavMenu>
           <NavLink to="/Modellierung">Heizkostenvergleich</NavLink>
-          <NavLink to="/DXF">Technische Dateneinlesung</NavLink>
+          <NavLink to="/DXF">DXF</NavLink>
         </NavMenu>
         <NavBtn>
           <Button>
